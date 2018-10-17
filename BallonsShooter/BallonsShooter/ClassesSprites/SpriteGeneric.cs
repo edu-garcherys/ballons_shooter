@@ -35,7 +35,7 @@ namespace Sprites
 		/// </summary>
 		public Vector2 Position
 		{
-			protected get { return _position; }
+			get { return _position; }
 			set { _position = value; }
 		}
 
@@ -79,11 +79,15 @@ namespace Sprites
 			get { return _rectangle; }
 		}
 
-		// todo: commentaires
-		protected int _frameWidth;			// Width of a given frame
-		protected int _frameHeight;			// Height of a given frame
 
-		protected Rectangle _rectDestination = new Rectangle();	// The area where we want to display the image strip in the game
+    // todo: commentaires
+    private int _frameWidth;     // Width of a given frame
+    public int FrameWidth {  get => _frameWidth; protected set => _frameWidth = value; }
+
+    private int _frameHeight;      // Height of a given frame
+    public int FrameHeight { get => _frameHeight; protected set => _frameHeight = value; }
+
+    protected Rectangle _rectDestination = new Rectangle();	// The area where we want to display the image strip in the game
 
 		#region constructeur
 		/// <summary>
@@ -139,8 +143,8 @@ namespace Sprites
 		public virtual void LoadContent(string textureName)
 		{
       _texture = _game.Content.Load<Texture2D>(textureName);
-      _frameHeight = _texture.Height;
-      _frameWidth = _texture.Width;
+      FrameHeight = _texture.Height;
+      FrameWidth = _texture.Width;
     }
 
     /// <summary>
@@ -165,10 +169,10 @@ namespace Sprites
 
 			// rectangle d'affichage pour le sprite
 			_rectDestination = new Rectangle(
-				(int)_position.X - (int)(_frameWidth * _scale) / 2,
-				(int)_position.Y - (int)(_frameHeight * _scale) / 2,
-				(int)(_frameWidth * _scale),
-				(int)(_frameHeight * _scale));
+				(int)_position.X - (int)(FrameWidth * _scale) / 2,
+				(int)_position.Y - (int)(FrameHeight * _scale) / 2,
+				(int)(FrameWidth * _scale),
+				(int)(FrameHeight * _scale));
 
 
 			// calcul du rectangle englobant nécessaire pour les collisions

@@ -13,15 +13,11 @@ namespace BallonsShooter
   {
     GraphicsDeviceManager _graphics;
     SpriteBatch _spriteBatch;
-
-    // viseur
-    SpriteGeneric _viseur;
-
+    
+    Gamer _joueur1;
+    
     // la vague de ballons
     BallonsWave _ballonswave;
-
-    // gestion de la souris
-    MouseState _currentMouseState;
 
     // backgroung texture
     Texture2D backgroundTexture;
@@ -50,8 +46,8 @@ namespace BallonsShooter
     /// </summary>
     protected override void Initialize()
     {
-      // instantiation du viseur
-      _viseur = new SpriteGeneric(this);
+      _joueur1 = new Gamer(this, "Joueur 1", "viseur_blue");
+      _joueur1.Initialize();
 
       // instantiation des ballons
       _ballonswave = new BallonsWave(this, 500);
@@ -69,19 +65,18 @@ namespace BallonsShooter
     protected override void LoadContent()
     {
       // l'application démarre en plein écran et haute resolution
-      _graphics.PreferredBackBufferWidth = GraphicsDevice.DisplayMode.Width;
-      _graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height;
-      _graphics.IsFullScreen = true;
+      _graphics.PreferredBackBufferWidth = GraphicsDevice.DisplayMode.Width-100;
+      _graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height-100;
+      _graphics.IsFullScreen = false;
       _graphics.ApplyChanges();
 
       // Create a new SpriteBatch, which can be used to draw textures.
       _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-      // chargement de la texture pour le viseur
-      _viseur.LoadContent("viseur");
+      // start gamer 1
+      _joueur1.LoadContent();
 
-      // positionnement initial du viseur : centre de l'écran
-      _viseur.SetPosition(SpriteGeneric.ViewportPosition.CENTER);
+
 
       // chargement des polices
       msg_joueur1.LoadContent();
@@ -89,8 +84,7 @@ namespace BallonsShooter
 
       // load background texture
       backgroundTexture = Content.Load<Texture2D>("background/watch-tower-802102_1920");
-      mainFrame = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-           
+      mainFrame = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);          
       
     }
 
@@ -100,7 +94,7 @@ namespace BallonsShooter
     /// </summary>
     protected override void UnloadContent()
     {
-      _viseur.UnloadContent();
+      _joueur1.UnloadContent();
       _ballonswave.UnloadContent();
     }
 
@@ -114,21 +108,18 @@ namespace BallonsShooter
       if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
         Exit();
 
-      // le viseur doit suivre la souris
-      _currentMouseState = Mouse.GetState();
-      _viseur.Position = new Vector2(
-        _currentMouseState.X,
-        _currentMouseState.Y);
-      _viseur.Update(gameTime);
+      // manage player keyboard moves
+      _joueur1.Move(Keyboard.GetState());
+      _joueur1.Update(gameTime);
 
       // play sound
-      if (_currentMouseState.LeftButton == ButtonState.Pressed)
+      if (Mouse.GetState().LeftButton == ButtonState.Pressed)
       {
         song = Content.Load<Song>("sound/M1 Garand Single-SoundBible.com-1941178963");
         MediaPlayer.Play(song);
       }
 
-      _ballonswave.Update(gameTime, _currentMouseState);
+      _ballonswave.Update(gameTime, _joueur1);
 
       base.Update(gameTime);
     }
@@ -149,11 +140,10 @@ namespace BallonsShooter
       // affichage des ballons
       _ballonswave.Draw(_spriteBatch);
 
-      // affichage du viseur
-      _viseur.Draw(_spriteBatch);
-
+      _joueur1.Draw(_spriteBatch);
+      
       // Draw Hello World
-      msg_joueur1.Text = "Joueur 1 : " + score1++;
+      msg_joueur1.Text = _joueur1.message;
       msg_joueur1.Draw(_spriteBatch);      
 
       _spriteBatch.End();

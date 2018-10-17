@@ -47,6 +47,7 @@
     <Compile Include="ClassesSprites\SpriteGeneric.cs" />
     <Compile Include="ClassesSprites\SpriteGenericAnimated.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Gamer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

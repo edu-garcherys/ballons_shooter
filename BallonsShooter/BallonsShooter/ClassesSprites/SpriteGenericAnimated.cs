@@ -58,8 +58,8 @@ namespace Sprites
 		{
 			base.LoadContent(textureName);
 
-			_frameWidth = frameWidth;
-			_frameHeight = frameHeight;
+			FrameWidth = frameWidth;
+			FrameHeight = frameHeight;
 			_frameNbRows = frameNbRows;
 			_frameNbCols = frameNbCols;
 			_frameCount = _frameNbRows * _frameNbCols;
@@ -109,10 +109,10 @@ namespace Sprites
 
 			// grab the correct frame in the image strip by multiplying the currentFrame index by the frame width
 			_rectSource = new Rectangle(
-				_frameIndex.X * _frameWidth,
-				_frameIndex.Y * _frameHeight, 
-				_frameWidth,
-				_frameHeight);
+				_frameIndex.X * FrameWidth,
+				_frameIndex.Y * FrameHeight, 
+				FrameWidth,
+				FrameHeight);
 
 			base.Update(gameTime);
 		}

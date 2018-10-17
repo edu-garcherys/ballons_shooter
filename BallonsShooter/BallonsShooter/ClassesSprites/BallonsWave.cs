@@ -53,7 +53,7 @@ namespace BallonsShooter
     /// </summary>
     /// <param name="gameTime"></param>
     /// <param name="mouse"></param>
-    public void Update(GameTime gameTime, MouseState mouse)
+    public void Update(GameTime gameTime, Gamer J1)
     {
       _elapsedTimeMs += (int)gameTime.ElapsedGameTime.TotalMilliseconds;
 
@@ -70,7 +70,7 @@ namespace BallonsShooter
       // mise à jour de tous les ballons
       foreach (SpriteBallon b in _ballonsList)
       {
-        b.Update(gameTime, mouse);
+        b.Update(gameTime, J1);
       }
       _game.Window.Title = string.Format("Nombre de ballons : {0}", _ballonsList.Count);
     }

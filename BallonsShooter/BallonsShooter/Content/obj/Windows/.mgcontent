@@ -7,7 +7,6 @@
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/explosion_4x10.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/explosion_5x5.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/explosion_animated.png</File>
-    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/viseur.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/ballons/argente.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/ballons/bleu_ciel_nacre.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/ballons/bleu_nuit.png</File>
@@ -19,5 +18,7 @@
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/Courier New.spritefont</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/myfont.spritefont</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/M1 Garand Single-SoundBible.com-1941178963.mp3</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/viseur_blue.png</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/viseur_red.png</File>
   </SourceFiles>
 </SourceFileCollection>

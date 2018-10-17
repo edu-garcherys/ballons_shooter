@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using BallonsShooter;
 #endregion
 
 namespace Sprites
@@ -46,7 +47,7 @@ namespace Sprites
 		/// </summary>
 		/// <param name="gameTime"></param>
 		/// <param name="mouse"></param>
-		public void Update(GameTime gameTime, MouseState mouse)
+		public void Update(GameTime gameTime, Gamer J1)
 		{
 			// vérifie si le ballon est mort -> desactivé et explosion finie ou hors de l'écran
 			_toBeRemoved = 
@@ -63,10 +64,10 @@ namespace Sprites
 			if (_toBeRemoved) return;
 
 			// le bouton gauche est activé
-			if (mouse.LeftButton == ButtonState.Pressed && _isactive)
+			if (Keyboard.GetState().IsKeyDown(Keys.Space) && _isactive)
 			{
 				// verifier s'il y a collision avec le ballon
-				if (_rectDestination.Contains(mouse.X, mouse.Y))
+				if (_rectDestination.Contains(J1.Position.X, J1.Position.Y))
 				{
 					// on active l'explosion
 					_explosionAnimated.IsActive = true;
@@ -92,9 +93,7 @@ namespace Sprites
 					IsVisible = false;
 					Scale = 0;
 				}
-			}
-
-            
+			}           
 
 			base.Update(gameTime);
 		}
