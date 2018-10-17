@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using Sprites;
 
 namespace BallonsShooter
@@ -26,16 +27,18 @@ namespace BallonsShooter
     Texture2D backgroundTexture;
     Rectangle mainFrame;
 
-    SpriteFont Font1;
-    Vector2 FontPos;
+    DisplayText msg_joueur1;
+    int score1 = 0;
+    
+    Song song;
+
 
     public Game1()
     {
       _graphics = new GraphicsDeviceManager(this);
 
       // l'application démarre en plein écran
-      //_graphics.IsFullScreen = false;
-
+      _graphics.IsFullScreen = true;
 
       Window.Title = "CFPT Ballons Shooter";
 
@@ -54,7 +57,10 @@ namespace BallonsShooter
       _viseur = new SpriteGeneric(this);
 
       // instantiation des ballons
-      _ballonswave = new BallonsWave(this, 500);      
+      _ballonswave = new BallonsWave(this, 500);
+
+      // instantiation des messages
+      msg_joueur1 = new DisplayText(this);
 
       base.Initialize();
     }
@@ -70,16 +76,19 @@ namespace BallonsShooter
 
       // chargement de la texture pour le viseur
       _viseur.LoadContent("viseur");
+
       // positionnement initial du viseur : centre de l'écran
       _viseur.SetPosition(SpriteGeneric.ViewportPosition.CENTER);
+
+      // chargement des polices
+      msg_joueur1.LoadContent();
+      msg_joueur1.Text = "Joueur 1 : " + score1;
 
       // load background texture
       backgroundTexture = Content.Load<Texture2D>("background/watch-tower-802102_1920");
       mainFrame = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-
-      // Create a new SpriteBatch, which can be used to draw textures.
-      Font1 = Content.Load<SpriteFont>("Courier New");
-      FontPos = new Vector2(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height - 50);
+           
+      
     }
 
     /// <summary>
@@ -109,7 +118,14 @@ namespace BallonsShooter
         _currentMouseState.Y);
       _viseur.Update(gameTime);
 
-      _ballonswave.Update(gameTime, Mouse.GetState());
+      // play sound
+      if (_currentMouseState.LeftButton == ButtonState.Pressed)
+      {
+        song = Content.Load<Song>("sound/M1 Garand Single-SoundBible.com-1941178963");
+        MediaPlayer.Play(song);
+      }
+
+      _ballonswave.Update(gameTime, _currentMouseState);
 
       base.Update(gameTime);
     }
@@ -124,9 +140,8 @@ namespace BallonsShooter
 
       _spriteBatch.Begin();
 
-      // Draw the background.
+      // Draw the background
       _spriteBatch.Draw(backgroundTexture, mainFrame, Color.White);
-
 
       // affichage des ballons
       _ballonswave.Draw(_spriteBatch);
@@ -135,12 +150,8 @@ namespace BallonsShooter
       _viseur.Draw(_spriteBatch);
 
       // Draw Hello World
-      string output = "CFPT Ecole Informatique";
-
-      // Find the center of the string
-      Vector2 FontOrigin = Font1.MeasureString(output) / 2;
-      // Draw the string
-      _spriteBatch.DrawString(Font1, output, FontPos, Color.Red, 0, FontOrigin, 2.0f, SpriteEffects.None, 0.8f);
+      msg_joueur1.Text = "Joueur 1 : " + score1++;
+      msg_joueur1.Draw(_spriteBatch);      
 
       _spriteBatch.End();
 

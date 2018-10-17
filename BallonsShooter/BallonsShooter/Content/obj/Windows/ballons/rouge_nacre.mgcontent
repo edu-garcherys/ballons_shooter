@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/ballons/rouge_nacre.png</SourceFile>
-  <SourceTime>2014-02-03T13:46:40+01:00</SourceTime>
+  <SourceTime>2018-10-17T20:56:53.5227196+02:00</SourceTime>
   <DestFile>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/bin/Windows/ballons/rouge_nacre.xnb</DestFile>
-  <DestTime>2018-10-17T15:41:14.6899548+02:00</DestTime>
+  <DestTime>2018-10-17T20:57:13.5401123+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
