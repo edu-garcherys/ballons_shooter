@@ -37,9 +37,6 @@ namespace BallonsShooter
     {
       _graphics = new GraphicsDeviceManager(this);
 
-      // l'application démarre en plein écran
-      _graphics.IsFullScreen = true;
-
       Window.Title = "CFPT Ballons Shooter";
 
       Content.RootDirectory = "Content";
@@ -71,6 +68,12 @@ namespace BallonsShooter
     /// </summary>
     protected override void LoadContent()
     {
+      // l'application démarre en plein écran et haute resolution
+      _graphics.PreferredBackBufferWidth = GraphicsDevice.DisplayMode.Width;
+      _graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height;
+      _graphics.IsFullScreen = true;
+      _graphics.ApplyChanges();
+
       // Create a new SpriteBatch, which can be used to draw textures.
       _spriteBatch = new SpriteBatch(GraphicsDevice);
 
