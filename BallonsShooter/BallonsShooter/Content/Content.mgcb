@@ -157,3 +157,10 @@
 /processorParam:TextureFormat=Color
 /build:background/watch-tower-802102_1920.jpg
 
+#begin Courier New.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Courier New.spritefont
+

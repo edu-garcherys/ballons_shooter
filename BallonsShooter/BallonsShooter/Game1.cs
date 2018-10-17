@@ -26,13 +26,15 @@ namespace BallonsShooter
     Texture2D backgroundTexture;
     Rectangle mainFrame;
 
+    SpriteFont Font1;
+    Vector2 FontPos;
 
     public Game1()
     {
       _graphics = new GraphicsDeviceManager(this);
 
       // l'application démarre en plein écran
-      _graphics.IsFullScreen = true;
+      //_graphics.IsFullScreen = false;
 
 
       Window.Title = "CFPT Ballons Shooter";
@@ -74,6 +76,10 @@ namespace BallonsShooter
       // load background texture
       backgroundTexture = Content.Load<Texture2D>("background/watch-tower-802102_1920");
       mainFrame = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+
+      // Create a new SpriteBatch, which can be used to draw textures.
+      Font1 = Content.Load<SpriteFont>("Courier New");
+      FontPos = new Vector2(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height - 50);
     }
 
     /// <summary>
@@ -127,6 +133,14 @@ namespace BallonsShooter
 
       // affichage du viseur
       _viseur.Draw(_spriteBatch);
+
+      // Draw Hello World
+      string output = "CFPT Ecole Informatique";
+
+      // Find the center of the string
+      Vector2 FontOrigin = Font1.MeasureString(output) / 2;
+      // Draw the string
+      _spriteBatch.DrawString(Font1, output, FontPos, Color.Red, 0, FontOrigin, 2.0f, SpriteEffects.None, 0.8f);
 
       _spriteBatch.End();
 
