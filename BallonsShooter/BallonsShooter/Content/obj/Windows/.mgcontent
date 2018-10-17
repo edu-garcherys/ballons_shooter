@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/explosion_4x10.png</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/explosion_5x5.png</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/explosion_animated.png</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/viseur.png</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/ballons/argente.png</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/ballons/bleu_ciel_nacre.png</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/ballons/bleu_nuit.png</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/ballons/dore.png</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/ballons/fushia_nacre.png</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/ballons/rose_nacre.png</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/ballons/rouge_nacre.png</File>
+  </SourceFiles>
+</SourceFileCollection>
