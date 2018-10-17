@@ -22,10 +22,18 @@ namespace BallonsShooter
     // gestion de la souris
     MouseState _currentMouseState;
 
+    // backgroung texture
+    Texture2D backgroundTexture;
+    Rectangle mainFrame;
+
+
     public Game1()
     {
       _graphics = new GraphicsDeviceManager(this);
+
+      // l'application démarre en plein écran
       _graphics.IsFullScreen = true;
+
 
       Window.Title = "CFPT Ballons Shooter";
 
@@ -44,7 +52,7 @@ namespace BallonsShooter
       _viseur = new SpriteGeneric(this);
 
       // instantiation des ballons
-      _ballonswave = new BallonsWave(this, 500);
+      _ballonswave = new BallonsWave(this, 500);      
 
       base.Initialize();
     }
@@ -60,9 +68,12 @@ namespace BallonsShooter
 
       // chargement de la texture pour le viseur
       _viseur.LoadContent("viseur");
-      // positionnement initiale du viseur : centre de l'écran
+      // positionnement initial du viseur : centre de l'écran
       _viseur.SetPosition(SpriteGeneric.ViewportPosition.CENTER);
 
+      // load background texture
+      backgroundTexture = Content.Load<Texture2D>("background/watch-tower-802102_1920");
+      mainFrame = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
     }
 
     /// <summary>
@@ -106,6 +117,10 @@ namespace BallonsShooter
       GraphicsDevice.Clear(Color.CornflowerBlue);
 
       _spriteBatch.Begin();
+
+      // Draw the background.
+      _spriteBatch.Draw(backgroundTexture, mainFrame, Color.White);
+
 
       // affichage des ballons
       _ballonswave.Draw(_spriteBatch);
