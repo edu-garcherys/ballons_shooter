@@ -94,7 +94,7 @@ namespace BallonsShooter
       _sprite_viseur.SetPosition(_sprite_initiale_position);
 
       // load sound effect
-      _sound_fire = _game.Content.Load<SoundEffect>("sound/firesong");
+      _sound_fire = _game.Content.Load<SoundEffect>("sound/firesong_02");
 
       _score_message.LoadContent();
     }

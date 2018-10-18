@@ -12,7 +12,7 @@ namespace Sprites
   // ajout de la gravité
   class SpriteBallon : SpriteGeneric
   {
-    protected bool _isShooted = false;            // le ballon a été touché ?
+    protected bool _isShooted = false;                    // le ballon a été touché ?
     protected SpriteGenericAnimated _explosionAnimated;   // animation de l'explosion
 
     // gestion de la vie d'un ballon
@@ -135,7 +135,7 @@ namespace Sprites
     public override void Draw(SpriteBatch spriteBatch)
     {
       // affichage du ballon
-      base.Draw(spriteBatch);
+      if (!_isShooted) base.Draw(spriteBatch);
 
       // affichage de l'explosion (pas dessus)
       _explosionAnimated.Draw(spriteBatch);

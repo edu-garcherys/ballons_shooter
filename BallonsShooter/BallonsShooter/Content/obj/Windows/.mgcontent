@@ -15,12 +15,13 @@
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/ballons/rose_nacre.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/ballons/rouge_nacre.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/background/watch-tower-802102_1920.jpg</File>
-    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/Courier New.spritefont</File>
-    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/myfont.spritefont</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/viseur_blue.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/viseur_red.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/explosion.wav</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/firesong.wav</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/background/background_white.jpg</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/firesong_02.wav</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/fonts/moire_bold_24.spritefont</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/fonts/moire_bold_48.spritefont</File>
   </SourceFiles>
 </SourceFileCollection>

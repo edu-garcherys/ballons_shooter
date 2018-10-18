@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/explosion.wav</SourceFile>
-  <SourceTime>2018-10-18T10:50:15.5595738+02:00</SourceTime>
-  <DestFile>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/bin/Windows/sound/explosion.xnb</DestFile>
-  <DestTime>2018-10-18T15:10:51.645182+02:00</DestTime>
+  <SourceFile>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/firesong_02.wav</SourceFile>
+  <SourceTime>2018-10-18T13:53:20.8572509+02:00</SourceTime>
+  <DestFile>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/bin/Windows/sound/firesong_02.xnb</DestFile>
+  <DestTime>2018-10-18T15:10:52.356179+02:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

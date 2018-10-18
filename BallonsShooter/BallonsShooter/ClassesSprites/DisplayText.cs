@@ -37,7 +37,7 @@ namespace Sprites
     public void LoadContent()
     {
       // Create a new SpriteBatch, which can be used to draw textures.
-      _font = _game.Content.Load<SpriteFont>("myfont");
+      _font = _game.Content.Load<SpriteFont>("fonts/moire_bold_24");
 
     }
 
@@ -49,7 +49,7 @@ namespace Sprites
       // Find the center of the string
       Vector2 FontOrigin = _font.MeasureString(Text) / 2;
       // Draw the string
-      spriteBatch.DrawString(_font, Text, _position, _fontcolor, 0, FontOrigin, 2.0f, SpriteEffects.None, 0.8f);
+      spriteBatch.DrawString(_font, _text, _position, _fontcolor, 0, FontOrigin, 1.0f, SpriteEffects.None, 0.8f);
     }
 
 

@@ -50,10 +50,10 @@ namespace BallonsShooter
         SpriteGeneric.ViewportPosition.CENTER_LEFT,
         2500,
         new Dictionary<string, Keys>() {
-          {"UP", Keys.Up },
-          {"RIGHT", Keys.Right },
-          {"DOWN", Keys.Down },
-          {"LEFT", Keys.Left },
+          {"UP", Keys.W },
+          {"RIGHT", Keys.D },
+          {"DOWN", Keys.S },
+          {"LEFT", Keys.A },
           {"FIRE01", Keys.Space }
         }
         );
@@ -89,8 +89,8 @@ namespace BallonsShooter
     protected override void LoadContent()
     {
       // l'application démarre en plein écran et haute resolution
-      _graphics.PreferredBackBufferWidth = GraphicsDevice.DisplayMode.Width - 100;
-      _graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height - 100;
+      _graphics.PreferredBackBufferWidth = GraphicsDevice.DisplayMode.Width - 50;
+      _graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height - 50;
       _graphics.IsFullScreen = false;
       _graphics.ApplyChanges();
 
