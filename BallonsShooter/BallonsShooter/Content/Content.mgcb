@@ -183,15 +183,15 @@
 /processorParam:TextureFormat=Color
 /build:viseur_red.png
 
-#begin sound/firesong.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:sound/firesong.wav
-
 #begin sound/explosion.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sound/explosion.wav
+
+#begin sound/firesong.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound/firesong.wav
 
