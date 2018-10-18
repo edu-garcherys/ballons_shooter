@@ -25,6 +25,8 @@ namespace BallonsShooter
     Texture2D backgroundTexture;
     Rectangle mainFrame;
 
+    DisplayText _start_message;
+
     public Game1()
     {
       _graphics = new GraphicsDeviceManager(this);
@@ -46,7 +48,7 @@ namespace BallonsShooter
         this,
         "Joueur Bleu",
         Player.PlayerScreenPosition.LEFT,
-        "viseur_blue",
+        "viseurs/viseur_70_fin_blue",
         SpriteGeneric.ViewportPosition.CENTER_LEFT,
         2500,
         new Dictionary<string, Keys>() {
@@ -63,7 +65,7 @@ namespace BallonsShooter
         this,
         "Joueur Rouge",
         Player.PlayerScreenPosition.RIGHT,
-        "viseur_red",
+        "viseurs/viseur_70_fin_red",
         SpriteGeneric.ViewportPosition.CENTER_RIGHT,
         2500,
         new Dictionary<string, Keys>() {
@@ -79,6 +81,10 @@ namespace BallonsShooter
       // instantiation des ballons
       _ballonswave = new BallonsWave(this, 500);
 
+      _start_message = new DisplayText(this, DisplayText.ViewportPosition.CENTER, DisplayText.TextEffect.FADEINOUT);
+      _start_message.Fontcolor = Color.Red;
+      _start_message.Text = "INSERT COIN";
+      
       base.Initialize();
     }
 
@@ -105,6 +111,7 @@ namespace BallonsShooter
       backgroundTexture = Content.Load<Texture2D>("background/background_white");
       mainFrame = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
 
+      _start_message.LoadContent();
     }
 
     /// <summary>
@@ -138,6 +145,7 @@ namespace BallonsShooter
 
       _ballonswave.Update(gameTime, _joueur1, _joueur2);
 
+      _start_message.Update(gameTime);
       base.Update(gameTime);
     }
 
@@ -159,6 +167,8 @@ namespace BallonsShooter
 
       _joueur1.Draw(_spriteBatch);
       _joueur2.Draw(_spriteBatch);
+
+      _start_message.Draw(_spriteBatch);
 
       _spriteBatch.End();
 

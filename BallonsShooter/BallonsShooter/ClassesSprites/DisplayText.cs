@@ -7,7 +7,10 @@ namespace Sprites
 {
   class DisplayText
   {
-    protected Game _game;								// référence vers la classe du jeu
+    public enum ViewportPosition { TOPLEFTCENTER, TOPCENTER, TOPRIGHTCENTER, BOTTOMLEFTCENTER, BOTTOMCENTER, BOTTOMRIGHTCENTER, CENTER };
+    public enum TextEffect { NONE, FADEINOUT, FADEIN };
+
+    protected Game _game;								            // référence vers la classe du jeu
     protected SpriteFont _font;
 
     protected ViewportPosition _viewportposition;
@@ -20,36 +23,79 @@ namespace Sprites
 
 
     Color _fontcolor = Color.Black;
+    float _alpha = 1;
+    float _alpha_step = 0.01f;
+
     public Color Fontcolor { get => _fontcolor; set => _fontcolor = value; }
 
-    public enum ViewportPosition { TOPLEFTCENTER, TOPCENTER, TOPRIGHTCENTER, BOTTOMLEFTCENTER, BOTTOMCENTER, BOTTOMRIGHTCENTER, CENTER };
     protected Vector2 _position;
 
+    TextEffect _texteffect = TextEffect.NONE;
+
+
     #region constructor
-    public DisplayText(Game game, ViewportPosition p)
+    public DisplayText(Game game, ViewportPosition p, TextEffect texteffect = TextEffect.NONE)
     {
       _game = game;
       _viewportposition = p;
+      _texteffect = texteffect;
 
+      if (texteffect == TextEffect.FADEIN)
+      {
+        _alpha = 0;
+      }
     }
     #endregion
 
     public void LoadContent()
     {
-      // Create a new SpriteBatch, which can be used to draw textures.
+      // Chargement de la font depuis les ressources
       _font = _game.Content.Load<SpriteFont>("fonts/moire_bold_24");
+    }
 
+    public virtual void Update(GameTime gameTime)
+    {
+      // Fade In Out Repeat
+      switch (_texteffect)
+      {
+        case TextEffect.FADEIN:
+          _alpha += _alpha < 1 ? _alpha_step : 0;
+          break;
+        case TextEffect.FADEINOUT:
+          _alpha += _alpha_step;
+          if (_alpha < 0 || _alpha > 1)
+          {
+            _alpha_step *= -1;
+          }
+          break;
+        case TextEffect.NONE:
+          _alpha = 1;
+          break;
+      }
+
+
+      _fontcolor = new Color(_fontcolor, _alpha);
     }
 
     public virtual void Draw(SpriteBatch spriteBatch)
     {
-      // update position
+      // Mise à jour de la position du message
       SetPosition();
 
-      // Find the center of the string
-      Vector2 FontOrigin = _font.MeasureString(Text) / 2;
-      // Draw the string
-      spriteBatch.DrawString(_font, _text, _position, _fontcolor, 0, FontOrigin, 1.0f, SpriteEffects.None, 0.8f);
+      // Définir le centre de la chaine de caractère
+      Vector2 fontOrigin = _font.MeasureString(Text) / 2;
+
+      // Dessiner le message
+      spriteBatch.DrawString(
+        _font,
+        _text,
+        _position,
+        _fontcolor,
+        0,
+        fontOrigin,
+        1.0f,
+        SpriteEffects.None,
+        0.8f);
     }
 
 

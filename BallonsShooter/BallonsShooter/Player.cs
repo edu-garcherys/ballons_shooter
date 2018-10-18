@@ -80,7 +80,8 @@ namespace BallonsShooter
 
       _score_message = new DisplayText(
         _game,
-        _position == PlayerScreenPosition.LEFT ? DisplayText.ViewportPosition.BOTTOMLEFTCENTER : DisplayText.ViewportPosition.BOTTOMRIGHTCENTER
+        _position == PlayerScreenPosition.LEFT ? DisplayText.ViewportPosition.BOTTOMLEFTCENTER : DisplayText.ViewportPosition.BOTTOMRIGHTCENTER,
+        DisplayText.TextEffect.FADEINOUT
         );
       _score_message.Fontcolor = _position == PlayerScreenPosition.LEFT ? Color.Blue : Color.Red;
     }
@@ -149,6 +150,8 @@ namespace BallonsShooter
       }
 
       _sprite_viseur.Update(gameTime);
+
+      _score_message.Update(gameTime);
     }
 
     public virtual void Draw(SpriteBatch spriteBatch)

@@ -23,5 +23,10 @@
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/firesong_02.wav</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/fonts/moire_bold_24.spritefont</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/fonts/moire_bold_48.spritefont</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/viseurs/viseur_red_128.png</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/viseurs/viseur_70_blue.png</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/viseurs/viseur_70_red.png</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/viseurs/viseur_70_fin_blue.png</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/viseurs/viseur_70_fin_red.png</File>
   </SourceFiles>
 </SourceFileCollection>
