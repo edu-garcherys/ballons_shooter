@@ -159,12 +159,6 @@
 /processorParam:TextureFormat=Compressed
 /build:myfont.spritefont
 
-#begin sound/M1 Garand Single-SoundBible.com-1941178963.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:sound/M1 Garand Single-SoundBible.com-1941178963.mp3
-
 #begin viseur_blue.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -188,4 +182,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:viseur_red.png
+
+#begin sound/firesong.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound/firesong.wav
+
+#begin sound/explosion.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound/explosion.wav
 

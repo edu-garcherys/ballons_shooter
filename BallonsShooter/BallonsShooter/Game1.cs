@@ -14,7 +14,7 @@ namespace BallonsShooter
     GraphicsDeviceManager _graphics;
     SpriteBatch _spriteBatch;
     
-    Gamer _joueur1;
+    Player _joueur1;
     
     // la vague de ballons
     BallonsWave _ballonswave;
@@ -22,13 +22,7 @@ namespace BallonsShooter
     // backgroung texture
     Texture2D backgroundTexture;
     Rectangle mainFrame;
-
-    DisplayText msg_joueur1;
-    int score1 = 0;
     
-    Song song;
-
-
     public Game1()
     {
       _graphics = new GraphicsDeviceManager(this);
@@ -46,14 +40,11 @@ namespace BallonsShooter
     /// </summary>
     protected override void Initialize()
     {
-      _joueur1 = new Gamer(this, "Joueur 1", "viseur_blue");
+      _joueur1 = new Player(this, "Joueur Bleu", "viseur_blue");
       _joueur1.Initialize();
 
       // instantiation des ballons
       _ballonswave = new BallonsWave(this, 500);
-
-      // instantiation des messages
-      msg_joueur1 = new DisplayText(this);
 
       base.Initialize();
     }
@@ -75,12 +66,6 @@ namespace BallonsShooter
 
       // start gamer 1
       _joueur1.LoadContent();
-
-
-
-      // chargement des polices
-      msg_joueur1.LoadContent();
-      msg_joueur1.Text = "Joueur 1 : " + score1;
 
       // load background texture
       backgroundTexture = Content.Load<Texture2D>("background/watch-tower-802102_1920");
@@ -111,14 +96,7 @@ namespace BallonsShooter
       // manage player keyboard moves
       _joueur1.Move(Keyboard.GetState());
       _joueur1.Update(gameTime);
-
-      // play sound
-      if (Mouse.GetState().LeftButton == ButtonState.Pressed)
-      {
-        song = Content.Load<Song>("sound/M1 Garand Single-SoundBible.com-1941178963");
-        MediaPlayer.Play(song);
-      }
-
+      
       _ballonswave.Update(gameTime, _joueur1);
 
       base.Update(gameTime);
@@ -141,10 +119,6 @@ namespace BallonsShooter
       _ballonswave.Draw(_spriteBatch);
 
       _joueur1.Draw(_spriteBatch);
-      
-      // Draw Hello World
-      msg_joueur1.Text = _joueur1.message;
-      msg_joueur1.Draw(_spriteBatch);      
 
       _spriteBatch.End();
 

@@ -2,7 +2,9 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using BallonsShooter;
+using Microsoft.Xna.Framework.Audio;
 #endregion
 
 namespace Sprites
@@ -19,6 +21,8 @@ namespace Sprites
 		{
 			get { return _toBeRemoved; }
 		}
+
+    SoundEffect _sound;
 
 		#region constructeurs
 		public SpriteBallon(Game game)
@@ -47,7 +51,7 @@ namespace Sprites
 		/// </summary>
 		/// <param name="gameTime"></param>
 		/// <param name="mouse"></param>
-		public void Update(GameTime gameTime, Gamer J1)
+		public void Update(GameTime gameTime, Player J1)
 		{
 			// vérifie si le ballon est mort -> desactivé et explosion finie ou hors de l'écran
 			_toBeRemoved = 
@@ -76,8 +80,15 @@ namespace Sprites
 					_explosionAnimated.Position = this._position;
 					_isShooted = true;
 
-					// on desactive le ballon
-					_isactive = false;
+          // increase J1 score
+          J1.Score++;
+
+          // sound explosion
+          _sound = _game.Content.Load<SoundEffect>("sound/explosion");
+          _sound.Play();
+
+          // on desactive le ballon
+          _isactive = false;
 				}
 			}
 

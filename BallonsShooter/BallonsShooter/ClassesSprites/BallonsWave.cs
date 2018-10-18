@@ -53,7 +53,7 @@ namespace BallonsShooter
     /// </summary>
     /// <param name="gameTime"></param>
     /// <param name="mouse"></param>
-    public void Update(GameTime gameTime, Gamer J1)
+    public void Update(GameTime gameTime, Player J1)
     {
       _elapsedTimeMs += (int)gameTime.ElapsedGameTime.TotalMilliseconds;
 
