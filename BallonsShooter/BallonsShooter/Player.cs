@@ -14,11 +14,17 @@ namespace BallonsShooter
 {
   class Player
   {
+    public enum PlayerScreenPosition { LEFT, RIGHT };
+
+
     private Game1 _game;
 
     private String _name = "Joueur X";
+    private PlayerScreenPosition _position = PlayerScreenPosition.LEFT;
 
     // controls keys    
+    private IDictionary<string, Keys> _controls;
+    /*
     private IDictionary<string, Keys> _controls = new Dictionary<string, Keys>()
     {
       {"UP", Keys.Up },
@@ -27,8 +33,9 @@ namespace BallonsShooter
       {"LEFT", Keys.Left },
       {"FIRE01", Keys.Space }
     };
-
+    */
     SpriteGeneric _sprite_viseur;
+    SpriteGeneric.ViewportPosition _sprite_initiale_position;
     private String _viseur_texture_name;
     private float _movespeed = 10;
 
@@ -42,16 +49,40 @@ namespace BallonsShooter
 
     SoundEffect _sound_fire;
 
-    public Player(Game1 game, String name, String viseur_texture_name)
+    protected int _elapsedTimeMs;       // gestion du temps entre les appels à Update()
+    protected int _elapsedTimeBtwFireMs;    // délai entre l'appartion des ballons
+    protected bool _fireflag = true;
+
+    public Player(
+      Game1 game,
+      String name,
+      PlayerScreenPosition p,
+      String viseur_texture_name,
+      SpriteGeneric.ViewportPosition init_pos,
+      int elapsedTimeBtwFireMs,
+      Dictionary<string, Keys> controls)
+
     {
       _game = game;
       _name = name;
+      _position = p;
       _viseur_texture_name = viseur_texture_name;
+      _sprite_initiale_position = init_pos;
+
+      _elapsedTimeMs = 0;
+      _elapsedTimeBtwFireMs = elapsedTimeBtwFireMs;
+
+      _controls = controls;
     }
     public virtual void Initialize()
     {
       _sprite_viseur = new SpriteGeneric(_game);
-      _score_message = new DisplayText(_game);
+
+      _score_message = new DisplayText(
+        _game,
+        _position == PlayerScreenPosition.LEFT ? DisplayText.ViewportPosition.BOTTOMLEFTCENTER : DisplayText.ViewportPosition.BOTTOMRIGHTCENTER
+        );
+      _score_message.Fontcolor = _position == PlayerScreenPosition.LEFT ? Color.Blue : Color.Red;
     }
 
     public virtual void LoadContent()
@@ -60,7 +91,7 @@ namespace BallonsShooter
       _sprite_viseur.LoadContent(_viseur_texture_name);
 
       // positionnement initial du viseur : centre de l'écran
-      _sprite_viseur.SetPosition(SpriteGeneric.ViewportPosition.CENTER_LEFT);
+      _sprite_viseur.SetPosition(_sprite_initiale_position);
 
       // load sound effect
       _sound_fire = _game.Content.Load<SoundEffect>("sound/firesong");
@@ -84,9 +115,10 @@ namespace BallonsShooter
       Y -= state.IsKeyDown(Controls["UP"]) ? _movespeed : 0;
       Y += state.IsKeyDown(Controls["DOWN"]) ? _movespeed : 0;
 
-      if (state.IsKeyDown(Controls["FIRE01"]))
+      if (state.IsKeyDown(Controls["FIRE01"]) && _fireflag)
       {
         _sound_fire.Play();
+        _fireflag = false;
         /*
         _fire_song = _game.Content.Load<Song>("sound/M1 Garand Single-SoundBible.com-1941178963");
         MediaPlayer.IsRepeating = false;
@@ -107,6 +139,15 @@ namespace BallonsShooter
 
     public virtual void Update(GameTime gameTime)
     {
+      _elapsedTimeMs += (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+      // le temps est dépassé, on ajoute un nouveau ballon
+      if (_elapsedTimeMs > _elapsedTimeBtwFireMs)
+      {
+        _fireflag = true;
+        _elapsedTimeMs = 0;
+      }
+
       _sprite_viseur.Update(gameTime);
     }
 
