@@ -45,7 +45,7 @@ namespace BallonsShooter
     public int Score { get => _score; set => _score = value; }
     public IDictionary<string, Keys> Controls { get => _controls; set => _controls = value; }
 
-    DisplaySentence _score_message;
+    DrawSentence _score_message;
 
     SoundEffect _sound_fire;
 
@@ -78,10 +78,10 @@ namespace BallonsShooter
     {
       _sprite_viseur = new SpriteGeneric(_game);
 
-      _score_message = new DisplaySentence(
+      _score_message = new DrawSentence(
         _game,
-        _position == PlayerScreenPosition.LEFT ? DisplaySentence.TextPosition.BOTTOMLEFTCENTER : DisplaySentence.TextPosition.BOTTOMRIGHTCENTER,
-        DisplaySentence.TextEffect.FADEINOUT
+        _position == PlayerScreenPosition.LEFT ? DrawSentence.TextPosition.LEFTCENTERBOTTOM : DrawSentence.TextPosition.RIGHTCENTERBOTTOM,
+        DrawSentence.TextEffect.NONE
         );
       _score_message.Font_color = _position == PlayerScreenPosition.LEFT ? Color.Blue : Color.Red;
     }
@@ -142,7 +142,7 @@ namespace BallonsShooter
     {
       _elapsedTimeMs += (int)gameTime.ElapsedGameTime.TotalMilliseconds;
 
-      // le temps est dépassé, on ajoute un nouveau ballon
+      // attente pour second tir
       if (_elapsedTimeMs > _elapsedTimeBtwFireMs)
       {
         _fireflag = true;

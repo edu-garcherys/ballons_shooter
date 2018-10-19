@@ -42,8 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ClassesSprites\BallonsWave.cs" />
-    <Compile Include="ClassesSprites\DisplaySentence.cs" />
-    <Compile Include="ClassesSprites\DisplaySentences.cs" />
+    <Compile Include="ClassesSprites\DrawSentence.cs" />
     <Compile Include="ClassesSprites\SpriteBallon.cs" />
     <Compile Include="ClassesSprites\SpriteGeneric.cs" />
     <Compile Include="ClassesSprites\SpriteGenericAnimated.cs" />
@@ -52,6 +51,7 @@
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Timer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

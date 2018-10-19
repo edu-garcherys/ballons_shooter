@@ -20,6 +20,17 @@ namespace BallonsShooter
     /// </summary>
     protected enum GameState { WAITING, PLAY, FINISHED };
 
+    public enum GameControlsKeys {
+      EXIT, START, RESTART
+    };
+
+    protected IDictionary<GameControlsKeys, Keys> _gameControls = new Dictionary<GameControlsKeys, Keys>()
+    {
+      {GameControlsKeys.EXIT, Keys.Escape },
+      {GameControlsKeys.START, Keys.Enter },
+      {GameControlsKeys.RESTART, Keys.Back }
+    };
+
     /// <summary>
     /// etat courant du jeu
     /// </summary>
@@ -40,9 +51,14 @@ namespace BallonsShooter
     Rectangle mainFrame;
 
     // les messages
-    DisplaySentence _message_waiting;
+    DrawSentence _message_waiting;
 
     TypeWriterTextBox _twtb_waiting;
+    TypeWriterTextBox _twtb_winner;
+
+    Timer _timer;
+
+    int _nbPointsMax = 2;
 
     public Game1()
     {
@@ -62,7 +78,7 @@ namespace BallonsShooter
     {
       _joueur1 = new Player(
         this,
-        "Joueur Bleu",
+        "Joueur 1",
         Player.PlayerScreenPosition.LEFT,
         "viseurs/viseur_70_fin_blue",
         SpriteGeneric.ViewportPosition.CENTER_LEFT,
@@ -79,7 +95,7 @@ namespace BallonsShooter
 
       _joueur2 = new Player(
         this,
-        "Joueur Rouge",
+        "Joueur 2",
         Player.PlayerScreenPosition.RIGHT,
         "viseurs/viseur_70_fin_red",
         SpriteGeneric.ViewportPosition.CENTER_RIGHT,
@@ -101,16 +117,25 @@ namespace BallonsShooter
       _twtb_waiting = new TypeWriterTextBox(this);
       _twtb_waiting.Initialize();
       _twtb_waiting.Text = "PLEASE INSERT COIN !";
+      _twtb_waiting.TextboxRectanglePosition = TypeWriterTextBox.TwtbPosition.CENTER;
       _twtb_waiting.Effects = TypeWriterTextBox.TwtbEffects.TYPEWRITER;
 
+      _twtb_winner = new TypeWriterTextBox(this);
+      _twtb_winner.Initialize();
+      _twtb_winner.Text = "En attente du gagnant";
+      _twtb_winner.TextboxRectanglePosition = TypeWriterTextBox.TwtbPosition.CENTER;
+      _twtb_winner.Effects = TypeWriterTextBox.TwtbEffects.TYPEWRITER;
+
       // init waiting message
-      _message_waiting = new DisplaySentence(
-        this, 
-        DisplaySentence.TextPosition.CENTER, 
-        DisplaySentence.TextEffect.COLORLOOP | DisplaySentence.TextEffect.FADEINOUT);
+      _message_waiting = new DrawSentence(
+        this,
+        DrawSentence.TextPosition.CENTER,
+        DrawSentence.TextEffect.COLORLOOP | DrawSentence.TextEffect.FADEINOUT);
       _message_waiting.Font_color = Color.Red;
       _message_waiting.Font_scale = 2.0f;
       _message_waiting.Text = "PLEASE INSERT COIN !";
+
+      _timer = new Timer(this);
 
       base.Initialize();
     }
@@ -141,6 +166,7 @@ namespace BallonsShooter
       _message_waiting.LoadContent();
 
       _twtb_waiting.LoadContent();
+      _twtb_winner.LoadContent();
     }
 
     /// <summary>
@@ -151,10 +177,11 @@ namespace BallonsShooter
     {
       _joueur1.UnloadContent();
       _joueur2.UnloadContent();
-            
+
       _ballonswave.UnloadContent();
 
       _twtb_waiting.UnloadContent();
+      _twtb_winner.UnloadContent();
     }
 
     /// <summary>
@@ -164,21 +191,24 @@ namespace BallonsShooter
     /// <param name="gameTime">Provides a snapshot of timing values.</param>
     protected override void Update(GameTime gameTime)
     {
-      if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+      if (Keyboard.GetState().IsKeyDown(_gameControls[GameControlsKeys.EXIT]))
         Exit();
 
       // jeu en attente
       switch (_gameState)
       {
         case GameState.WAITING:
+          _twtb_waiting.Update(gameTime);
           _message_waiting.Update(gameTime);
           // changement état du jeu si touche Enter
-          if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+          if (Keyboard.GetState().IsKeyDown(_gameControls[GameControlsKeys.START]))
           {
             _gameState = GameState.PLAY;
           }
           break;
         case GameState.PLAY:
+          _timer.Update(gameTime);
+
           // manage player keyboard moves
           _joueur1.Move(Keyboard.GetState());
           _joueur1.Update(gameTime);
@@ -187,12 +217,30 @@ namespace BallonsShooter
           _joueur2.Update(gameTime);
 
           _ballonswave.Update(gameTime, _joueur1, _joueur2);
+
+          if (_joueur1.Score >= _nbPointsMax)
+          {
+            _twtb_winner.Text = "Joueur 1 gagnant";
+            _gameState = GameState.FINISHED;
+          }
+          if (_joueur2.Score >= _nbPointsMax)
+          {
+            _twtb_winner.Text = "Joueur 2 gagnant";
+            _gameState = GameState.FINISHED;
+          }
           break;
         case GameState.FINISHED:
+          _twtb_winner.Update(gameTime);
+          if (Keyboard.GetState().IsKeyDown(_gameControls[GameControlsKeys.RESTART]))
+          {
+            _gameState = GameState.WAITING;
+            _timer.Restart();
+            this.Initialize();
+          }
           break;
       }
 
-      _twtb_waiting.Update(gameTime);
+      
 
       base.Update(gameTime);
     }
@@ -223,10 +271,15 @@ namespace BallonsShooter
 
           _joueur1.Draw(_spriteBatch);
           _joueur2.Draw(_spriteBatch);
+
+          _timer.Draw(_spriteBatch);
           break;
         case GameState.FINISHED:
+          _twtb_winner.Draw(_spriteBatch);
           break;
-      }      
+      }
+
+      
 
       _spriteBatch.End();
 

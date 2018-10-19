@@ -6,13 +6,21 @@ using System;
 
 namespace Sprites
 {
-  class DisplaySentence
+  class DrawSentence
   {
     #region enum
     /// <summary>
     /// screen position
     /// </summary>
-    public enum TextPosition { TOPLEFTCENTER, TOPCENTER, TOPRIGHTCENTER, BOTTOMLEFTCENTER, BOTTOMCENTER, BOTTOMRIGHTCENTER, CENTER, FREE };
+    public enum TextPosition {
+      LEFTCENTERTOP,
+      LEFTCENTERBOTTOM,
+      CENTERTOP,
+      CENTER,
+      CENTERBOTTOM,
+      RIGHTCENTERTOP,
+      RIGHTCENTERBOTTOM,
+      FREE };
 
     /// <summary>
     /// text effects flags
@@ -63,7 +71,7 @@ namespace Sprites
     #endregion
 
     #region constructor
-    public DisplaySentence(Game game, TextPosition p, TextEffect texteffect = TextEffect.NONE)
+    public DrawSentence(Game game, TextPosition p, TextEffect texteffect = TextEffect.NONE)
     {
       _game = game;
       _viewportposition = p;
@@ -165,26 +173,26 @@ namespace Sprites
 
       switch (_viewportposition)
       {
-        case TextPosition.TOPLEFTCENTER:
+        case TextPosition.LEFTCENTERTOP:
           coordinates = new Vector2(maxWidth / 3 - fontOrigin.X / 2, 2 * fontOrigin.Y);
           break;
-        case TextPosition.TOPCENTER:
-          coordinates = new Vector2(_game.GraphicsDevice.Viewport.Width / 2, 2 * fontOrigin.Y);
+        case TextPosition.CENTERTOP:
+          coordinates = new Vector2(maxWidth / 2, 2 * fontOrigin.Y);
           break;
-        case TextPosition.TOPRIGHTCENTER:
+        case TextPosition.RIGHTCENTERTOP:
           coordinates = new Vector2(2 * (maxWidth / 3) + fontOrigin.X / 2, 2 * fontOrigin.Y);
           break;
-        case TextPosition.BOTTOMLEFTCENTER:
+        case TextPosition.LEFTCENTERBOTTOM:
           coordinates = new Vector2(maxWidth / 3 - fontOrigin.X / 2, maxHeight - 2 * fontOrigin.Y);
           break;
-        case TextPosition.BOTTOMCENTER:
-          coordinates = new Vector2(_game.GraphicsDevice.Viewport.Width / 2, maxHeight - 2 * fontOrigin.Y);
+        case TextPosition.CENTERBOTTOM:
+          coordinates = new Vector2(maxWidth / 2, maxHeight - 2 * fontOrigin.Y);
           break;
-        case TextPosition.BOTTOMRIGHTCENTER:
+        case TextPosition.RIGHTCENTERBOTTOM:
           coordinates = new Vector2(2 * (maxWidth / 3) + fontOrigin.X / 2, maxHeight - 2 * fontOrigin.Y);
           break;
         case TextPosition.CENTER:
-          coordinates = new Vector2(_game.GraphicsDevice.Viewport.Width / 2, _game.GraphicsDevice.Viewport.Height / 2);
+          coordinates = new Vector2(maxWidth / 2, maxHeight / 2);
           break;
         default:
           coordinates = _text_position_coordinates;

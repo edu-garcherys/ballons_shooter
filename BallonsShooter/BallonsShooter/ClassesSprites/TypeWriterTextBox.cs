@@ -18,11 +18,15 @@ namespace Sprites
       TYPEWRITER = 2
     };
 
+    public enum TwtbPosition { FULLSCREEN, CENTER };
+
     private Game _game;
 
 
 
     private Rectangle _textboxRectangle;
+    private TwtbPosition _textboxRectanglePosition;
+    private Vector2 _textboxRectangleSize;
     private TwtbEffects _effects;
     Texture2D _backgroundColor;
 
@@ -37,8 +41,9 @@ namespace Sprites
     private bool _isLoop;
 
     public Rectangle TextboxRectangle { private get => _textboxRectangle; set => _textboxRectangle = value; }
-    public string Text { get => _text; set => _text = value; }
+    public string Text { get => _text == null ? "" : _text; set => _text = value; }
     public TwtbEffects Effects { set => _effects = value; }
+    internal TwtbPosition TextboxRectanglePosition { get => _textboxRectanglePosition; set => _textboxRectanglePosition = value; }
 
     public TypeWriterTextBox(Game game)
     {
@@ -47,7 +52,7 @@ namespace Sprites
 
     public virtual void Initialize()
     {
-      
+      _textboxRectangleSize = new Vector2(500, 150);
     }
 
     public virtual void LoadContent()
@@ -59,7 +64,7 @@ namespace Sprites
       _isDoneDrawing = false;
       _isLoop = true;
 
-      TextboxRectangle = new Rectangle(0, 0, _game.GraphicsDevice.Viewport.Width, _game.GraphicsDevice.Viewport.Height);
+      UpdateTextboxRectangle();
       _parsedText = parseText(Text);
     }
 
@@ -120,9 +125,9 @@ namespace Sprites
         spriteBatch.Draw(_backgroundColor, TextboxRectangle, Color.White);
 
       spriteBatch.DrawString(
-        _font, 
-        parseText(_typedText), 
-        new Vector2(TextboxRectangle.X, TextboxRectangle.Y), 
+        _font,
+        parseText(_typedText),
+        new Vector2(TextboxRectangle.X, TextboxRectangle.Y),
         _fontColor);
     }
 
@@ -130,7 +135,7 @@ namespace Sprites
     {
       String line = String.Empty;
       String returnString = String.Empty;
-      String[] wordArray = text.Split(' ');
+      String[] wordArray = Text.Split(' ');
 
       foreach (String word in wordArray)
       {
@@ -144,6 +149,23 @@ namespace Sprites
       }
 
       return returnString + line;
+    }
+
+    private void UpdateTextboxRectangle()
+    {
+      int maxWidth = _game.GraphicsDevice.Viewport.Width;
+      int maxHeight = _game.GraphicsDevice.Viewport.Height;
+
+      switch (_textboxRectanglePosition)
+      {
+        case TwtbPosition.FULLSCREEN:
+          TextboxRectangle = new Rectangle(0, 0, _game.GraphicsDevice.Viewport.Width, _game.GraphicsDevice.Viewport.Height);
+          break;
+        case TwtbPosition.CENTER:
+          TextboxRectangle = new Rectangle((int)(maxWidth - _textboxRectangleSize.X) / 2, (int)(maxHeight - _textboxRectangleSize.Y) / 2, (int)_textboxRectangleSize.X, (int)_textboxRectangleSize.Y);
+          break;
+      }
+
     }
   }
 }
