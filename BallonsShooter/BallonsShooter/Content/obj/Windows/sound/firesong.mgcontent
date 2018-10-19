@@ -3,7 +3,7 @@
   <SourceFile>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/firesong.wav</SourceFile>
   <SourceTime>2018-10-18T10:50:53.4362517+02:00</SourceTime>
   <DestFile>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/bin/Windows/sound/firesong.xnb</DestFile>
-  <DestTime>2018-10-18T15:48:33.9931593+02:00</DestTime>
+  <DestTime>2018-10-19T09:08:12.0523449+02:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

@@ -12,9 +12,23 @@ namespace BallonsShooter
   /// </summary>
   public class Game1 : Game
   {
+    /// <summary>
+    /// gestion de l'état du jeux
+    ///   WAITING : attente joueurs
+    ///   PLAY : partie en cours
+    ///   FINISHED : affichage scores
+    /// </summary>
+    protected enum GameState { WAITING, PLAY, FINISHED };
+
+    /// <summary>
+    /// etat courant du jeu
+    /// </summary>
+    GameState _gameState = GameState.WAITING;
+
     GraphicsDeviceManager _graphics;
     SpriteBatch _spriteBatch;
 
+    // les joueurs
     Player _joueur1;
     Player _joueur2;
 
@@ -25,12 +39,14 @@ namespace BallonsShooter
     Texture2D backgroundTexture;
     Rectangle mainFrame;
 
-    DisplayText _start_message;
+    // les messages
+    DisplaySentence _message_waiting;
+
+    TypeWriterTextBox _twtb_waiting;
 
     public Game1()
     {
       _graphics = new GraphicsDeviceManager(this);
-
       Window.Title = "CFPT Ballons Shooter";
 
       Content.RootDirectory = "Content";
@@ -81,10 +97,21 @@ namespace BallonsShooter
       // instantiation des ballons
       _ballonswave = new BallonsWave(this, 500);
 
-      _start_message = new DisplayText(this, DisplayText.ViewportPosition.CENTER, DisplayText.TextEffect.FADEINOUT);
-      _start_message.Fontcolor = Color.Red;
-      _start_message.Text = "INSERT COIN";
-      
+      // typewritetextbox waiting message
+      _twtb_waiting = new TypeWriterTextBox(this);
+      _twtb_waiting.Initialize();
+      _twtb_waiting.Text = "PLEASE INSERT COIN !";
+      _twtb_waiting.Effects = TypeWriterTextBox.TwtbEffects.TYPEWRITER;
+
+      // init waiting message
+      _message_waiting = new DisplaySentence(
+        this, 
+        DisplaySentence.TextPosition.CENTER, 
+        DisplaySentence.TextEffect.COLORLOOP | DisplaySentence.TextEffect.FADEINOUT);
+      _message_waiting.Font_color = Color.Red;
+      _message_waiting.Font_scale = 2.0f;
+      _message_waiting.Text = "PLEASE INSERT COIN !";
+
       base.Initialize();
     }
 
@@ -111,7 +138,9 @@ namespace BallonsShooter
       backgroundTexture = Content.Load<Texture2D>("background/background_white");
       mainFrame = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
 
-      _start_message.LoadContent();
+      _message_waiting.LoadContent();
+
+      _twtb_waiting.LoadContent();
     }
 
     /// <summary>
@@ -122,8 +151,10 @@ namespace BallonsShooter
     {
       _joueur1.UnloadContent();
       _joueur2.UnloadContent();
-
+            
       _ballonswave.UnloadContent();
+
+      _twtb_waiting.UnloadContent();
     }
 
     /// <summary>
@@ -133,19 +164,36 @@ namespace BallonsShooter
     /// <param name="gameTime">Provides a snapshot of timing values.</param>
     protected override void Update(GameTime gameTime)
     {
-      if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+      if (Keyboard.GetState().IsKeyDown(Keys.Escape))
         Exit();
 
-      // manage player keyboard moves
-      _joueur1.Move(Keyboard.GetState());
-      _joueur1.Update(gameTime);
+      // jeu en attente
+      switch (_gameState)
+      {
+        case GameState.WAITING:
+          _message_waiting.Update(gameTime);
+          // changement état du jeu si touche Enter
+          if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+          {
+            _gameState = GameState.PLAY;
+          }
+          break;
+        case GameState.PLAY:
+          // manage player keyboard moves
+          _joueur1.Move(Keyboard.GetState());
+          _joueur1.Update(gameTime);
 
-      _joueur2.Move(Keyboard.GetState());
-      _joueur2.Update(gameTime);
+          _joueur2.Move(Keyboard.GetState());
+          _joueur2.Update(gameTime);
 
-      _ballonswave.Update(gameTime, _joueur1, _joueur2);
+          _ballonswave.Update(gameTime, _joueur1, _joueur2);
+          break;
+        case GameState.FINISHED:
+          break;
+      }
 
-      _start_message.Update(gameTime);
+      _twtb_waiting.Update(gameTime);
+
       base.Update(gameTime);
     }
 
@@ -159,16 +207,26 @@ namespace BallonsShooter
 
       _spriteBatch.Begin();
 
-      // Draw the background
+      // dessine le fond
       _spriteBatch.Draw(backgroundTexture, mainFrame, Color.White);
 
-      // affichage des ballons
-      _ballonswave.Draw(_spriteBatch);
+      switch (_gameState)
+      {
+        case GameState.WAITING:
+          _message_waiting.Draw(_spriteBatch);
+          _twtb_waiting.Draw(_spriteBatch);
+          break;
+        case GameState.PLAY:
 
-      _joueur1.Draw(_spriteBatch);
-      _joueur2.Draw(_spriteBatch);
+          // affichage des ballons
+          _ballonswave.Draw(_spriteBatch);
 
-      _start_message.Draw(_spriteBatch);
+          _joueur1.Draw(_spriteBatch);
+          _joueur2.Draw(_spriteBatch);
+          break;
+        case GameState.FINISHED:
+          break;
+      }      
 
       _spriteBatch.End();
 

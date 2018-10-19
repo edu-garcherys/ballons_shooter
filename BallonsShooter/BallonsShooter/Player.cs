@@ -45,7 +45,7 @@ namespace BallonsShooter
     public int Score { get => _score; set => _score = value; }
     public IDictionary<string, Keys> Controls { get => _controls; set => _controls = value; }
 
-    DisplayText _score_message;
+    DisplaySentence _score_message;
 
     SoundEffect _sound_fire;
 
@@ -78,12 +78,12 @@ namespace BallonsShooter
     {
       _sprite_viseur = new SpriteGeneric(_game);
 
-      _score_message = new DisplayText(
+      _score_message = new DisplaySentence(
         _game,
-        _position == PlayerScreenPosition.LEFT ? DisplayText.ViewportPosition.BOTTOMLEFTCENTER : DisplayText.ViewportPosition.BOTTOMRIGHTCENTER,
-        DisplayText.TextEffect.FADEINOUT
+        _position == PlayerScreenPosition.LEFT ? DisplaySentence.TextPosition.BOTTOMLEFTCENTER : DisplaySentence.TextPosition.BOTTOMRIGHTCENTER,
+        DisplaySentence.TextEffect.FADEINOUT
         );
-      _score_message.Fontcolor = _position == PlayerScreenPosition.LEFT ? Color.Blue : Color.Red;
+      _score_message.Font_color = _position == PlayerScreenPosition.LEFT ? Color.Blue : Color.Red;
     }
 
     public virtual void LoadContent()
