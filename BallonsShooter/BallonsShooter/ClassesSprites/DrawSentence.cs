@@ -12,7 +12,8 @@ namespace Sprites
     /// <summary>
     /// screen position
     /// </summary>
-    public enum TextPosition {
+    public enum TextPosition
+    {
       LEFTCENTERTOP,
       LEFTCENTERBOTTOM,
       CENTERTOP,
@@ -20,7 +21,8 @@ namespace Sprites
       CENTERBOTTOM,
       RIGHTCENTERTOP,
       RIGHTCENTERBOTTOM,
-      FREE };
+      FREE
+    };
 
     /// <summary>
     /// text effects flags
@@ -32,7 +34,9 @@ namespace Sprites
       FADEIN = 1,
       FADEOUT = 2,
       FADEINOUT = 4,
-      COLORLOOP = 8
+      COLORLOOP = 8,
+      BACKGROUND = 16,
+      ZOOMIN = 32
     };
     #endregion
 
@@ -84,6 +88,11 @@ namespace Sprites
     }
     #endregion
 
+    public virtual void Initialize()
+    {
+      if (_text_effect.HasFlag(TextEffect.ZOOMIN))
+        _font_size = 0f;
+    }
     public void LoadContent()
     {
       // Chargement de la font depuis les ressources
@@ -96,12 +105,15 @@ namespace Sprites
       bool isFadeOut = _text_effect.HasFlag(TextEffect.FADEOUT);
       bool isFadeInOut = _text_effect.HasFlag(TextEffect.FADEINOUT);
       bool isColorLoop = _text_effect.HasFlag(TextEffect.COLORLOOP);
+      bool isZoomIn = _text_effect.HasFlag(TextEffect.ZOOMIN);
 
+      // fade in effect
       if (isFadeIn)
       {
         _font_color_alpha += _font_color_alpha < 1 ? _font_color_alpha_step : 0;
       }
 
+      // fade out effect
       if (isFadeOut)
       {
         _font_color_alpha -= _font_color_alpha > 1 ? 0 : _font_color_alpha_step;
@@ -117,6 +129,7 @@ namespace Sprites
         }
       }
 
+      // text color loop (@tobe improved)
       if (isColorLoop)
       {
         _elapsedTimeMs += (int)gameTime.ElapsedGameTime.TotalMilliseconds;
@@ -129,6 +142,12 @@ namespace Sprites
           _font_color = _font_colors[_font_color_loop_index];
           _elapsedTimeMs = 0;
         }
+      }
+
+      // text zoom from x1 to x4
+      if (isZoomIn)
+      {
+        Font_scale += Font_scale < 4.0f ? 0.1f : 0f;
       }
 
       _font_color = new Color(_font_color, _font_color_alpha);
@@ -146,6 +165,20 @@ namespace Sprites
       // définir le centre de la chaine de caractère
       Vector2 fontOrigin = _font.MeasureString(Text) / 2;
 
+      // draw background
+      if (_text_effect.HasFlag(TextEffect.BACKGROUND))
+      {
+        int border = 5;
+        int X = (int)(_text_position_coordinates.X - fontOrigin.X) - border;
+        int Y = (int)(_text_position_coordinates.Y - fontOrigin.Y) - border;
+        int dX = (int)_font.MeasureString(Text).X + 2 * border;
+        int dY = (int)_font.MeasureString(Text).Y + 2 * border;
+        spriteBatch.Draw(
+          _game.Content.Load<Texture2D>("solidwhite"),
+          new Rectangle(X, Y, dX, dY),
+          Color.White * .5f
+          );
+      }
       // dessiner le message sprite
       spriteBatch.DrawString(
         _font,

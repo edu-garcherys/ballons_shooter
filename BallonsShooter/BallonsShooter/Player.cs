@@ -16,7 +16,6 @@ namespace BallonsShooter
   {
     public enum PlayerScreenPosition { LEFT, RIGHT };
 
-
     private Game1 _game;
 
     private String _name = "Joueur X";
@@ -24,16 +23,7 @@ namespace BallonsShooter
 
     // controls keys    
     private IDictionary<string, Keys> _controls;
-    /*
-    private IDictionary<string, Keys> _controls = new Dictionary<string, Keys>()
-    {
-      {"UP", Keys.Up },
-      {"RIGHT", Keys.Right },
-      {"DOWN", Keys.Down },
-      {"LEFT", Keys.Left },
-      {"FIRE01", Keys.Space }
-    };
-    */
+    
     SpriteGeneric _sprite_viseur;
     SpriteGeneric.ViewportPosition _sprite_initiale_position;
     private String _viseur_texture_name;
@@ -50,7 +40,7 @@ namespace BallonsShooter
     SoundEffect _sound_fire;
 
     protected int _elapsedTimeMs;       // gestion du temps entre les appels à Update()
-    protected int _elapsedTimeBtwFireMs;    // délai entre l'appartion des ballons
+    protected int _elapsedTimeBtwFireMs;    // délai entre les tirs
     protected bool _fireflag = true;
 
     public Player(
@@ -80,8 +70,8 @@ namespace BallonsShooter
 
       _score_message = new DrawSentence(
         _game,
-        _position == PlayerScreenPosition.LEFT ? DrawSentence.TextPosition.LEFTCENTERBOTTOM : DrawSentence.TextPosition.RIGHTCENTERBOTTOM,
-        DrawSentence.TextEffect.NONE
+        _position == PlayerScreenPosition.LEFT ? DrawSentence.TextPosition.LEFTCENTERTOP : DrawSentence.TextPosition.RIGHTCENTERTOP,
+        DrawSentence.TextEffect.BACKGROUND
         );
       _score_message.Font_color = _position == PlayerScreenPosition.LEFT ? Color.Blue : Color.Red;
     }
@@ -132,8 +122,7 @@ namespace BallonsShooter
       Y = MathHelper.Clamp(Y, 0, _game.GraphicsDevice.Viewport.Height);
 
       _sprite_viseur.Position = new Vector2(X, Y);
-
-      _score_message.Text = _name + " : " + Score;
+      
       //message = X + " " + Y;
 
     }
@@ -152,6 +141,7 @@ namespace BallonsShooter
       _sprite_viseur.Update(gameTime);
 
       _score_message.Update(gameTime);
+
     }
 
     public virtual void Draw(SpriteBatch spriteBatch)
@@ -160,6 +150,7 @@ namespace BallonsShooter
       _sprite_viseur.Draw(spriteBatch);
 
       // affichage du score
+      _score_message.Text = _name + " : " + Score;
       _score_message.Draw(spriteBatch);
     }
 

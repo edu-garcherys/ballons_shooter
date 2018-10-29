@@ -26,7 +26,7 @@ namespace Sprites
     }
 
     // liste d'énumeration pour positionner le sprite par rapport à l'écran
-    public enum ViewportPosition { TOPLEFT, TOPCENTER, TOPRIGHT, BOTTOMLEFT, BOTTOMCENTER, BOTTOMRIGHT, CENTER, CENTER_LEFT, CENTER_RIGHT, RANDOMTOP_OUTSIDE };
+    public enum ViewportPosition { TOPLEFT, TOPCENTER, TOPRIGHT, BOTTOMLEFT, BOTTOMCENTER, BOTTOMRIGHT, CENTER, CENTER_LEFT, CENTER_RIGHT, RANDOMTOP_OUTSIDE, RANDOMLEFT_OUTSIDE, RANDOMRIGHT_OUTSIDE };
 
     // gestion de la position du sprite
     protected Vector2 _position;
@@ -207,9 +207,12 @@ namespace Sprites
       int maxWidth = _game.GraphicsDevice.Viewport.Width - (realWidth / 2);
       int maxHeight = _game.GraphicsDevice.Viewport.Height - (realHeight / 2);
 
+      int rand;
+
       switch (p)
       {
         case ViewportPosition.TOPLEFT:
+          coordonnees = Vector2.Zero;
           break;
         case ViewportPosition.TOPCENTER:
           coordonnees = new Vector2(_game.GraphicsDevice.Viewport.Width / 2, 0);
@@ -236,9 +239,18 @@ namespace Sprites
           coordonnees = new Vector2(2 * (_game.GraphicsDevice.Viewport.Width / 3), _game.GraphicsDevice.Viewport.Height / 2);
           break;
         case ViewportPosition.RANDOMTOP_OUTSIDE:
-          int rand = _random.Next(0, _game.GraphicsDevice.Viewport.Width - realWidth);
+          rand = _random.Next(0, _game.GraphicsDevice.Viewport.Width - realWidth);
           coordonnees = new Vector2((int)(rand + realWidth / 2), (int)(-realHeight / 2));
           break;
+        case ViewportPosition.RANDOMLEFT_OUTSIDE:
+          rand = _random.Next(0, _game.GraphicsDevice.Viewport.Height - realHeight);
+          coordonnees = new Vector2(0, rand);
+          break;
+        case ViewportPosition.RANDOMRIGHT_OUTSIDE:
+          rand = _random.Next(0, _game.GraphicsDevice.Viewport.Height - realHeight);
+          coordonnees = new Vector2(_game.GraphicsDevice.Viewport.Width, rand);
+          break;
+
       }
 
       // application des coordoonées

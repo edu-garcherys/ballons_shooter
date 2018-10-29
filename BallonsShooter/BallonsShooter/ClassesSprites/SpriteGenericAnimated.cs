@@ -13,7 +13,7 @@ namespace Sprites
 {
 	class SpriteGenericAnimated : SpriteGeneric
 	{
-		int _elapsedTime;			// The time since we last updated the frame
+		protected int _elapsedTime;			// The time since we last updated the frame
 
 		int _frameNbRows;
 		int _frameNbCols;
@@ -22,7 +22,7 @@ namespace Sprites
 		int _frameCount;			// The number of frames that the animation contains
 		int _frameTime;				// The time (ms) we display a frame until the next one
 
-		Rectangle _rectSource = new Rectangle();		// The area of the image strip we want to display
+		protected Rectangle _rectSource = new Rectangle();		// The area of the image strip we want to display
 
 		public bool _looping;		// Determines if the animation will keep playing or deactivate after one run
 

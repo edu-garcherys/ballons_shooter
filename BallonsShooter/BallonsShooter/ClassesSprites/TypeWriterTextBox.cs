@@ -14,58 +14,59 @@ namespace Sprites
     public enum TwtbEffects
     {
       NONE = 0,
-      BACKGROUND = 1,
-      TYPEWRITER = 2
+      BACKGROUND = 1
     };
 
     public enum TwtbPosition { FULLSCREEN, CENTER };
 
     private Game _game;
 
-
-
-    private Rectangle _textboxRectangle;
-    private TwtbPosition _textboxRectanglePosition;
-    private Vector2 _textboxRectangleSize;
+    private Rectangle _tbRectangle;
+    private TwtbPosition _tbRectanglePosition;
+    private Vector2 _tbRectangleSize;
     private TwtbEffects _effects;
-    Texture2D _backgroundColor;
+    private Texture2D _bgColor;
 
     private SpriteFont _font;
-    private Color _fontColor = Color.Black;
+    private Color _fontColor = Color.WhiteSmoke;
     private String _text;
     private String _parsedText;
     private String _typedText;
     private double _typedTextLength;
-    private int _delayInMilliseconds;
+    private int _delayInMs;
     private bool _isDoneDrawing;
     private bool _isLoop;
 
-    public Rectangle TextboxRectangle { private get => _textboxRectangle; set => _textboxRectangle = value; }
+    public Rectangle TbRectangle { private get => _tbRectangle; set => _tbRectangle = value; }
     public string Text { get => _text == null ? "" : _text; set => _text = value; }
     public TwtbEffects Effects { set => _effects = value; }
-    internal TwtbPosition TextboxRectanglePosition { get => _textboxRectanglePosition; set => _textboxRectanglePosition = value; }
+    internal TwtbPosition TbRectanglePosition { get => _tbRectanglePosition; set => _tbRectanglePosition = value; }
+    public int DelayInMs { set => _delayInMs = value; }
 
     public TypeWriterTextBox(Game game)
     {
       _game = game;
+
+      // full screen by default
+      _tbRectangleSize = new Vector2(500,100);
+      _delayInMs = 100;
     }
 
     public virtual void Initialize()
     {
-      _textboxRectangleSize = new Vector2(500, 150);
+      
     }
 
     public virtual void LoadContent()
     {
-      _backgroundColor = _game.Content.Load<Texture2D>("solidred");
-
+      _bgColor = _game.Content.Load<Texture2D>("solidwhite");
       _font = _game.Content.Load<SpriteFont>("fonts/moire_bold_24");
-      _delayInMilliseconds = 75;
+
       _isDoneDrawing = false;
       _isLoop = true;
+      _parsedText = Text;
 
       UpdateTextboxRectangle();
-      _parsedText = parseText(Text);
     }
 
     public virtual void UnloadContent()
@@ -75,71 +76,73 @@ namespace Sprites
 
     public virtual void Update(GameTime gameTime)
     {
-      bool isTypewriter = _effects.HasFlag(TwtbEffects.TYPEWRITER);
+      UpdateTextboxRectangle();
 
-      if (isTypewriter)
+      if (!_isDoneDrawing)
       {
-
-        if (!_isDoneDrawing)
+        // no typing
+        if (_delayInMs == 0)
         {
-          if (_delayInMilliseconds == 0)
+          _typedText = _parsedText;
+          _isDoneDrawing = true;
+        }
+        else if (_typedTextLength < _parsedText.Length)
+        {
+          // compute text current length
+          _typedTextLength = _typedTextLength + (gameTime.ElapsedGameTime.TotalMilliseconds / _delayInMs);
+
+          // is finished ?
+          if (_typedTextLength >= _parsedText.Length)
           {
-            _typedText = _parsedText;
+            _typedTextLength = _parsedText.Length;
             _isDoneDrawing = true;
           }
-          else if (_typedTextLength < _parsedText.Length)
-          {
-            _typedTextLength = _typedTextLength + gameTime.ElapsedGameTime.TotalMilliseconds / _delayInMilliseconds;
-
-            if (_typedTextLength >= _parsedText.Length)
-            {
-              _typedTextLength = _parsedText.Length;
-              _isDoneDrawing = true;
-            }
-
-            _typedText = _parsedText.Substring(0, (int)_typedTextLength);
-          }
-        }
-        else
-        {
-          if (_isLoop)
-          {
-            _typedTextLength = 0;
-            _parsedText = parseText(Text);
-            _typedText = "";
-            _isDoneDrawing = false;
-          }
+          // set new typed text
+          _typedText = _parsedText.Substring(0, (int)_typedTextLength);
         }
       }
       else
       {
-        _typedText = _text;
+        if (_isLoop)
+        {
+          // reset text writer text
+          _typedTextLength = 0;
+          _parsedText = ParseText(Text);
+          _typedText = "";
+          _isDoneDrawing = false;
+        }
       }
+
     }
 
     public virtual void Draw(SpriteBatch spriteBatch)
     {
-      bool isBackground = _effects.HasFlag(TwtbEffects.BACKGROUND);
+      // draw effect
+      if (_effects.HasFlag(TwtbEffects.BACKGROUND))
+      {
+        spriteBatch.Draw(_bgColor, TbRectangle, Color.White * 0.5f);
+      }
 
-      if (isBackground)
-        spriteBatch.Draw(_backgroundColor, TextboxRectangle, Color.White);
-
+      // draw text
       spriteBatch.DrawString(
         _font,
-        parseText(_typedText),
-        new Vector2(TextboxRectangle.X, TextboxRectangle.Y),
+        ParseText(_typedText),
+        new Vector2(TbRectangle.X, TbRectangle.Y),
         _fontColor);
     }
 
-    private String parseText(String text)
+    private String ParseText(String text)
     {
       String line = String.Empty;
       String returnString = String.Empty;
-      String[] wordArray = Text.Split(' ');
+
+      // protect text == null
+      text = text == null ? "" : text;
+      String[] wordArray = text.Split(' ');
 
       foreach (String word in wordArray)
       {
-        if (_font.MeasureString(line + word).Length() > TextboxRectangle.Width)
+        if (_font.MeasureString(line + word).Length() > _tbRectangle.Width)
         {
           returnString = returnString + line + '\n';
           line = String.Empty;
@@ -156,13 +159,13 @@ namespace Sprites
       int maxWidth = _game.GraphicsDevice.Viewport.Width;
       int maxHeight = _game.GraphicsDevice.Viewport.Height;
 
-      switch (_textboxRectanglePosition)
+      switch (_tbRectanglePosition)
       {
         case TwtbPosition.FULLSCREEN:
-          TextboxRectangle = new Rectangle(0, 0, _game.GraphicsDevice.Viewport.Width, _game.GraphicsDevice.Viewport.Height);
+          TbRectangle = new Rectangle(0, 0, maxWidth, maxHeight);
           break;
         case TwtbPosition.CENTER:
-          TextboxRectangle = new Rectangle((int)(maxWidth - _textboxRectangleSize.X) / 2, (int)(maxHeight - _textboxRectangleSize.Y) / 2, (int)_textboxRectangleSize.X, (int)_textboxRectangleSize.Y);
+          TbRectangle = new Rectangle((int)(maxWidth - _tbRectangleSize.X) / 2, (int)(maxHeight - _tbRectangleSize.Y) / 2, (int)_tbRectangleSize.X, (int)_tbRectangleSize.Y);
           break;
       }
 

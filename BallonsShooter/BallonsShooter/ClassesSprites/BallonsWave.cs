@@ -25,7 +25,7 @@ namespace BallonsShooter
     enum GAMESTATE { WAITING, STARTED, FINISHED };
 
     // listes des textures pour les ballons
-    private string[] BallonTextureNames = { "argente", "bleu_ciel_nacre", "bleu_nuit", "dore", "fushia_nacre", "rose_nacre", "rouge_nacre" };
+    private string[] BallonTextureNames = { "argente_cfpt", "bleu_ciel_nacre_cfpt", "bleu_nuit_cfpt", "dore_cfpt", "fushia_nacre_cfpt", "rose_nacre_cfpt", "rouge_nacre_cfpt" };
 
     public BallonsWave(Game game, int elapsedTimeBtwBallonMs)
     {
@@ -60,6 +60,9 @@ namespace BallonsShooter
       // le temps est dépassé, on ajoute un nouveau ballon
       if (_elapsedTimeMs > _elapsedTimeBtwBallonMs)
       {
+        // increase speed
+        if (_elapsedTimeBtwBallonMs > 5) _elapsedTimeBtwBallonMs -= 10;
+
         AddNewBallon();
         _elapsedTimeMs = 0;
       }
@@ -72,6 +75,7 @@ namespace BallonsShooter
       {
         b.Update(gameTime, J1, J2);
       }
+
       _game.Window.Title = string.Format("Nombre de ballons : {0}", _ballonsList.Count);
     }
 

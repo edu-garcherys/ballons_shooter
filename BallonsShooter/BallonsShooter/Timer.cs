@@ -18,9 +18,9 @@ namespace BallonsShooter
 
     public Timer(Game game)
     {
-      _txtTimer = new DrawSentence(game, DrawSentence.TextPosition.CENTERTOP, DrawSentence.TextEffect.NONE);
+      _txtTimer = new DrawSentence(game, DrawSentence.TextPosition.CENTERTOP, DrawSentence.TextEffect.BACKGROUND);
       _txtTimer.LoadContent();
-      _txtTimer.Font_color = Color.DarkMagenta;      
+      _txtTimer.Font_color = Color.Black;      
       _txtTimer.Text = "00:00:00.00";
     }
     public void Restart()
