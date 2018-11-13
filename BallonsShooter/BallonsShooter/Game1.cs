@@ -6,6 +6,7 @@ using System.Collections.Specialized;
 using Microsoft.Xna.Framework.Media;
 using Sprites;
 using System.Collections.Generic;
+using System;
 
 namespace BallonsShooter
 {
@@ -24,14 +25,15 @@ namespace BallonsShooter
 
     public enum GameControlsKeys
     {
-      EXIT, START, RESTART
+      EXIT, START, RESTART, SOUND
     };
 
     protected IDictionary<GameControlsKeys, Keys> _gameControls = new Dictionary<GameControlsKeys, Keys>()
     {
-      {GameControlsKeys.EXIT, Keys.Escape },
-      {GameControlsKeys.START, Keys.Enter },
-      {GameControlsKeys.RESTART, Keys.Back }
+      {GameControlsKeys.EXIT, Keys.Enter },
+      {GameControlsKeys.START, Keys.D8 },
+      {GameControlsKeys.RESTART, Keys.D9 },
+      {GameControlsKeys.SOUND, Keys.D6 }
     };
 
     /// <summary>
@@ -61,12 +63,18 @@ namespace BallonsShooter
     // les messages
     DrawSentence _dsWaiting;
 
+    TypeWriterTextBox _twtbCFPT;
+    TypeWriterTextBox _twtbExplain;
     TypeWriterTextBox _twtbWaiting;
     TypeWriterTextBox _twtbWinner;
 
     Timer _timer;
 
-    int _nbPointsMax = 10;
+    // game parameter
+    int _nbPointsMax = Convert.ToInt32(ConfigurationManager.AppSettings.Get("NbPoints"));
+    bool _soundEffectOn = ConfigurationManager.AppSettings.Get("SoundEffects") == "ON" ? true : false;
+    int _elapsedButtonDelayMs = 100;  // delay for activate command button in ms
+    int _elapsedButtonTimeMs = 0;
 
     public Game1()
     {
@@ -89,15 +97,15 @@ namespace BallonsShooter
         this,
         ConfigurationManager.AppSettings.Get("J1Name"),
         Player.PlayerScreenPosition.LEFT,
-        "viseurs/viseur_70_fin_blue",
+        "viseurs/viseur_70_fin_red",
         SpriteGeneric.ViewportPosition.CENTER_LEFT,
-        2000,
+        Convert.ToInt32(ConfigurationManager.AppSettings.Get("BetweenFireDelay")),
         new Dictionary<string, Keys>() {
           {"UP", Keys.W },
-          {"RIGHT", Keys.D },
+          {"RIGHT", Keys.D},
           {"DOWN", Keys.S },
           {"LEFT", Keys.A },
-          {"FIRE01", Keys.Space }
+          {"FIRE01", Keys.F }
         }
         );
       _joueur1.Initialize();
@@ -106,15 +114,15 @@ namespace BallonsShooter
         this,
         ConfigurationManager.AppSettings.Get("J2Name"),
         Player.PlayerScreenPosition.RIGHT,
-        "viseurs/viseur_70_fin_red",
+        "viseurs/viseur_70_fin_blue",
         SpriteGeneric.ViewportPosition.CENTER_RIGHT,
-        2000,
+        Convert.ToInt32(ConfigurationManager.AppSettings.Get("BetweenFireDelay")),
         new Dictionary<string, Keys>() {
           {"UP", Keys.Up },
-          {"RIGHT", Keys.Right},
+          {"RIGHT", Keys.Right },
           {"DOWN", Keys.Down },
           {"LEFT", Keys.Left },
-          {"FIRE01", Keys.NumPad0 }
+          {"FIRE01", Keys.NumPad4 }
         }
         );
       _joueur2.Initialize();
@@ -126,10 +134,27 @@ namespace BallonsShooter
       _birdR = new SpriteBird(this);
       _birdB = new SpriteBird(this);
 
+      // textes
+      _twtbCFPT = new TypeWriterTextBox(this);
+      _twtbCFPT.Initialize();
+      _twtbCFPT.Text = ConfigurationManager.AppSettings.Get("CFPTMessage");
+      _twtbCFPT.DelayInMs = 20;
+      _twtbCFPT.FontColor = Color.Black;
+      _twtbCFPT.TbRectanglePosition = TypeWriterTextBox.TwtbPosition.CENTERBOTTOM;
+      _twtbCFPT.Effects = TypeWriterTextBox.TwtbEffects.BACKGROUND | TypeWriterTextBox.TwtbEffects.NOTYPEWRITTER;
+
+      _twtbExplain = new TypeWriterTextBox(this);
+      _twtbExplain.Initialize();
+      _twtbExplain.Text = ConfigurationManager.AppSettings.Get("ExplainMessage");
+      _twtbExplain.FontColor = Color.DarkSlateGray;
+      _twtbExplain.TbRectanglePosition = TypeWriterTextBox.TwtbPosition.CENTERTOPMIDDLE;
+      _twtbExplain.Effects = TypeWriterTextBox.TwtbEffects.BACKGROUND | TypeWriterTextBox.TwtbEffects.NOTYPEWRITTER;
+
       // typewritertextbox waiting message
       _twtbWaiting = new TypeWriterTextBox(this);
       _twtbWaiting.Initialize();
-      _twtbWaiting.Text = ConfigurationManager.AppSettings.Get("WelcomeMessage");
+      _twtbWaiting.Text = ConfigurationManager.AppSettings.Get("StartMessage");
+      _twtbWaiting.FontColor = Color.Yellow;
       _twtbWaiting.TbRectanglePosition = TypeWriterTextBox.TwtbPosition.CENTER;
       _twtbWaiting.Effects = TypeWriterTextBox.TwtbEffects.NONE;
 
@@ -137,14 +162,15 @@ namespace BallonsShooter
       _twtbWinner = new TypeWriterTextBox(this);
       _twtbWinner.Initialize();
       _twtbWinner.Text = "En attente du gagnant";
+      _twtbWinner.FontColor = Color.WhiteSmoke;
       _twtbWinner.TbRectanglePosition = TypeWriterTextBox.TwtbPosition.CENTER;
-      _twtbWinner.Effects = TypeWriterTextBox.TwtbEffects.NONE;
+      _twtbWinner.Effects = TypeWriterTextBox.TwtbEffects.BACKGROUND;
 
       // init waiting message
       _dsWaiting = new DrawSentence(
         this,
         DrawSentence.TextPosition.CENTER,
-        DrawSentence.TextEffect.COLORLOOP | DrawSentence.TextEffect.FADEINOUT);
+        DrawSentence.TextEffect.FADEINOUT);
       _dsWaiting.Font_color = Color.Red;
       _dsWaiting.Font_scale = 2.0f;
       _dsWaiting.Text = "PLEASE INSERT COIN !";
@@ -187,6 +213,8 @@ namespace BallonsShooter
 
       _dsWaiting.LoadContent();
 
+      _twtbExplain.LoadContent();
+      _twtbCFPT.LoadContent();
       _twtbWaiting.LoadContent();
       _twtbWinner.LoadContent();
 
@@ -204,6 +232,8 @@ namespace BallonsShooter
 
       _ballonswave.UnloadContent();
 
+      _twtbExplain.UnloadContent();
+      _twtbCFPT.UnloadContent();
       _twtbWaiting.UnloadContent();
       _twtbWinner.UnloadContent();
     }
@@ -215,19 +245,34 @@ namespace BallonsShooter
     /// <param name="gameTime">Provides a snapshot of timing values.</param>
     protected override void Update(GameTime gameTime)
     {
+      // game exit
       if (Keyboard.GetState().IsKeyDown(_gameControls[GameControlsKeys.EXIT]))
         Exit();
 
-      // jeu en attente
+      // manage commands
+      if (Keyboard.GetState().IsKeyDown(_gameControls[GameControlsKeys.SOUND]))
+      {
+        _elapsedButtonTimeMs += (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+        if (_elapsedButtonTimeMs > _elapsedButtonDelayMs)
+        {
+          _elapsedButtonTimeMs = 0;
+          _soundEffectOn = !_soundEffectOn;
+        }
+        
+      }
+
+      // état du jeu
       switch (_gameState)
       {
         // attente des joueurs
         case GameState.WAITING:
+          _twtbCFPT.Update(gameTime);
+          _twtbExplain.Update(gameTime);
           _twtbWaiting.Update(gameTime);
           _dsWaiting.Update(gameTime);
 
-          _birdR.Update(gameTime);
-          _birdB.Update(gameTime);
+          _birdR.Update(gameTime, null, null, _soundEffectOn);
+          _birdB.Update(gameTime, null, null, _soundEffectOn);
 
           // changement état du jeu si touche Enter
           if (Keyboard.GetState().IsKeyDown(_gameControls[GameControlsKeys.START]))
@@ -240,27 +285,28 @@ namespace BallonsShooter
           _timer.Update(gameTime);
 
           // manage player keyboard moves
-          _joueur1.Move(Keyboard.GetState());
+          _joueur1.Move(Keyboard.GetState(), _soundEffectOn);
           _joueur1.Update(gameTime);
-
-          _joueur2.Move(Keyboard.GetState());
+          _joueur2.Move(Keyboard.GetState(), _soundEffectOn);
           _joueur2.Update(gameTime);
 
-          _birdR.Update(gameTime);
-          _birdB.Update(gameTime);
+          _birdR.Update(gameTime, _joueur1, _joueur2, _soundEffectOn);
+          _birdB.Update(gameTime, _joueur1, _joueur2, _soundEffectOn);
 
           // update ballons wave and scores
-          _ballonswave.Update(gameTime, _joueur1, _joueur2);
+          _ballonswave.Update(gameTime, _joueur1, _joueur2, _soundEffectOn);
 
           // end game
           if (_joueur1.Score >= _nbPointsMax)
           {
             _twtbWinner.Text = ConfigurationManager.AppSettings.Get("J1WinnerMsg");
+            _twtbWinner.FontColor = Color.Red;
             _gameState = GameState.FINISHED;
           }
           if (_joueur2.Score >= _nbPointsMax)
           {
             _twtbWinner.Text = ConfigurationManager.AppSettings.Get("J2WinnerMsg");
+            _twtbWinner.FontColor = Color.Blue;
             _gameState = GameState.FINISHED;
           }
           break;
@@ -304,8 +350,12 @@ namespace BallonsShooter
           // draw background front
           _spriteBatch.Draw(backgroundTexture_front, mainFrame, Color.White);
 
+          DisplayControls();
+
+          _twtbExplain.Draw(_spriteBatch);
           _twtbWaiting.Draw(_spriteBatch);
-          _dsWaiting.Draw(_spriteBatch);
+          _twtbCFPT.Draw(_spriteBatch);
+          //_dsWaiting.Draw(_spriteBatch);
 
           break;
         case GameState.PLAY:
@@ -320,6 +370,8 @@ namespace BallonsShooter
 
           // draw background front
           _spriteBatch.Draw(backgroundTexture_front, mainFrame, Color.White);
+
+          DisplayControls();
 
           _joueur1.Draw(_spriteBatch);
           _joueur2.Draw(_spriteBatch);
@@ -336,6 +388,8 @@ namespace BallonsShooter
           // draw background front
           _spriteBatch.Draw(backgroundTexture_front, mainFrame, Color.White);
 
+          DisplayControls();
+
           _joueur1.Draw(_spriteBatch);
           _joueur2.Draw(_spriteBatch);
 
@@ -347,6 +401,13 @@ namespace BallonsShooter
       _spriteBatch.End();
 
       base.Draw(gameTime);
+    }
+
+    private void DisplayControls()
+    {
+      // sound icon
+      _spriteBatch.Draw(Content.Load<Texture2D>(_soundEffectOn ? "icon_volume" : "icon_volume_muted"), new Vector2(10, 10), Color.White);
+      _spriteBatch.Draw(Content.Load<Texture2D>("logoinformatique_round"), new Vector2(GraphicsDevice.Viewport.Width - 138, GraphicsDevice.Viewport.Height - 138), Color.White);
     }
   }
 }

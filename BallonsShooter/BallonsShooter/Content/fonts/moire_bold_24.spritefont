@@ -52,7 +52,7 @@ with.
     -->
     <CharacterRegions>
       <CharacterRegion>
-        <Start>&#32;</Start>
+        <Start>&#32;</Start><!-- standard characters -->
         <End>&#126;</End>
       </CharacterRegion>
     </CharacterRegions>

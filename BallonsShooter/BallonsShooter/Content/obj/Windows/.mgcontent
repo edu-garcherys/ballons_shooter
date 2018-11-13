@@ -14,23 +14,18 @@
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/ballons/fushia_nacre.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/ballons/rose_nacre.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/ballons/rouge_nacre.png</File>
-    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/background/watch-tower-802102_1920.jpg</File>
-    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/viseur_blue.png</File>
-    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/viseur_red.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/explosion.wav</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/firesong.wav</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/background/background_white.jpg</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/firesong_02.wav</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/fonts/moire_bold_24.spritefont</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/fonts/moire_bold_48.spritefont</File>
-    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/viseurs/viseur_red_128.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/viseurs/viseur_70_blue.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/viseurs/viseur_70_red.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/viseurs/viseur_70_fin_blue.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/viseurs/viseur_70_fin_red.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/solidred.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/background/background_autumn.png</File>
-    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/background/background_autumn_front.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/solidwhite.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/background/background_autumn_front02.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/ballons/argente_cfpt.png</File>
@@ -40,8 +35,22 @@
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/ballons/fushia_nacre_cfpt.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/ballons/rose_nacre_cfpt.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/ballons/rouge_nacre_cfpt.png</File>
-    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/birds/images.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/birds/bird_red.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/birds/bird_blue.png</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/firesong_sniper_reload.wav</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/ambience_rainforest.wav</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/ambience_sundaychurch.wav</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/ballon_explo_01.wav</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/ballon_explo_02.wav</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/ballon_explo_03.wav</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/boing.wav</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/fire_blast.wav</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/fire_sniper_reload.wav</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/fonts/spicy_rice_24.spritefont</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/logoinformatique.png</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/logoinformatique_white.png</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/icon_volume.png</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/icon_volume_muted.png</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/logoinformatique_round.png</File>
   </SourceFiles>
 </SourceFileCollection>

@@ -57,8 +57,7 @@ namespace Sprites
 
     private TextPosition _viewportposition = TextPosition.FREE;   // position prédéfine
     private Vector2 _text_position_coordinates;                   // coordonnées du centre du texte
-
-
+    
     private TextEffect _text_effect = TextEffect.NONE;
 
     float _elapsedTimeBtwColorMs = 500;                           // durée pour le changement de couleurs (ms)
@@ -149,6 +148,8 @@ namespace Sprites
       {
         Font_scale += Font_scale < 4.0f ? 0.1f : 0f;
       }
+
+      
 
       _font_color = new Color(_font_color, _font_color_alpha);
     }

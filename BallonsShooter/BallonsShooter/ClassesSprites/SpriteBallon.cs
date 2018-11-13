@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using BallonsShooter;
 using Microsoft.Xna.Framework.Audio;
+using System;
 #endregion
 
 namespace Sprites
@@ -22,6 +23,9 @@ namespace Sprites
       get { return _toBeRemoved; }
     }
 
+    private Random _rnd = new Random(DateTime.Now.Millisecond);
+
+    private string[] _explosionSounds = { "sound/ballon_explo_01", "sound/ballon_explo_02", "sound/ballon_explo_03"};
     SoundEffect _sound;
 
     #region constructeurs
@@ -51,7 +55,7 @@ namespace Sprites
     /// </summary>
     /// <param name="gameTime"></param>
     /// <param name="mouse"></param>
-    public void Update(GameTime gameTime, Player J1, Player J2)
+    public void Update(GameTime gameTime, Player J1, Player J2, bool soundEffectOn = true)
     {
       // vérifie si le ballon est mort -> desactivé et explosion finie ou hors de l'écran
       _toBeRemoved =
@@ -81,8 +85,11 @@ namespace Sprites
           _isShooted = true;
 
           // sound explosion
-          _sound = _game.Content.Load<SoundEffect>("sound/explosion");
-          _sound.Play();
+          if (soundEffectOn)
+          {
+            _sound = _game.Content.Load<SoundEffect>(_explosionSounds[_rnd.Next(0, _explosionSounds.Length)]);
+            _sound.Play();
+          }
 
           // on desactive le ballon
           _isactive = false;
@@ -100,7 +107,7 @@ namespace Sprites
           _isShooted = true;
 
           // sound explosion
-          _sound = _game.Content.Load<SoundEffect>("sound/explosion");
+          _sound = _game.Content.Load<SoundEffect>(_explosionSounds[_rnd.Next(0, _explosionSounds.Length)]);
           _sound.Play();
 
           // on desactive le ballon

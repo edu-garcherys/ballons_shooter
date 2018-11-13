@@ -23,7 +23,7 @@ namespace BallonsShooter
 
     // controls keys    
     private IDictionary<string, Keys> _controls;
-    
+
     SpriteGeneric _sprite_viseur;
     SpriteGeneric.ViewportPosition _sprite_initiale_position;
     private String _viseur_texture_name;
@@ -35,8 +35,9 @@ namespace BallonsShooter
     public int Score { get => _score; set => _score = value; }
     public IDictionary<string, Keys> Controls { get => _controls; set => _controls = value; }
 
-    DrawSentence _score_message;
+    private DrawSentence _score_message;
 
+    private string[] _fireSounds = { "sound/fire_blast", "sound/fire_sniper_reload" };  // not used
     SoundEffect _sound_fire;
 
     protected int _elapsedTimeMs;       // gestion du temps entre les appels à Update()
@@ -73,7 +74,7 @@ namespace BallonsShooter
         _position == PlayerScreenPosition.LEFT ? DrawSentence.TextPosition.LEFTCENTERTOP : DrawSentence.TextPosition.RIGHTCENTERTOP,
         DrawSentence.TextEffect.BACKGROUND
         );
-      _score_message.Font_color = _position == PlayerScreenPosition.LEFT ? Color.Blue : Color.Red;
+      _score_message.Font_color = _position == PlayerScreenPosition.LEFT ? Color.Red : Color.Blue;
     }
 
     public virtual void LoadContent()
@@ -85,8 +86,7 @@ namespace BallonsShooter
       _sprite_viseur.SetPosition(_sprite_initiale_position);
 
       // load sound effect
-      _sound_fire = _game.Content.Load<SoundEffect>("sound/firesong_02");
-
+      _sound_fire = _game.Content.Load<SoundEffect>("sound/firesong_sniper_reload");
       _score_message.LoadContent();
     }
 
@@ -95,7 +95,7 @@ namespace BallonsShooter
       _sprite_viseur.UnloadContent();
     }
 
-    public void Move(KeyboardState state)
+    public void Move(KeyboardState state, bool soundEffect = true)
     {
       float X = _sprite_viseur.Position.X;
       float Y = _sprite_viseur.Position.Y;
@@ -108,7 +108,8 @@ namespace BallonsShooter
 
       if (state.IsKeyDown(Controls["FIRE01"]) && _fireflag)
       {
-        _sound_fire.Play();
+        if (soundEffect)
+          _sound_fire.Play();
         _fireflag = false;
         /*
         _fire_song = _game.Content.Load<Song>("sound/M1 Garand Single-SoundBible.com-1941178963");
@@ -122,7 +123,7 @@ namespace BallonsShooter
       Y = MathHelper.Clamp(Y, 0, _game.GraphicsDevice.Viewport.Height);
 
       _sprite_viseur.Position = new Vector2(X, Y);
-      
+
       //message = X + " " + Y;
 
     }
