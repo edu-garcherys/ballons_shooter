@@ -69,7 +69,13 @@ namespace Sprites
       {
         // Gamer hit ?
         KeyboardState kbstate = Keyboard.GetState();
-        if (J1 != null && kbstate.IsKeyDown(J1.Controls["FIRE01"]) && _rectDestination.Contains(J1.Position.X, J1.Position.Y))
+        if (J1 != null && (
+          kbstate.IsKeyDown(J1.Controls["FIRE01"]) ||
+          kbstate.IsKeyDown(J1.Controls["FIRE02"]) ||
+          kbstate.IsKeyDown(J1.Controls["FIRE03"]) ||
+          kbstate.IsKeyDown(J1.Controls["FIRE04"]) ||
+          kbstate.IsKeyDown(J1.Controls["FIRE05"]) ||
+          kbstate.IsKeyDown(J1.Controls["FIRE06"])) && _rectDestination.Contains(J1.Position.X, J1.Position.Y))
         {
           // sound explosion
           // http://soundbible.com/tags-bird.html
@@ -82,7 +88,13 @@ namespace Sprites
           }
           J1.Score -= 1;
         }
-        if (J2 != null && kbstate.IsKeyDown(J2.Controls["FIRE01"]) && _rectDestination.Contains(J2.Position.X, J2.Position.Y))
+        if (J2 != null && (
+          kbstate.IsKeyDown(J2.Controls["FIRE01"]) ||
+          kbstate.IsKeyDown(J2.Controls["FIRE02"]) ||
+          kbstate.IsKeyDown(J2.Controls["FIRE03"]) ||
+          kbstate.IsKeyDown(J2.Controls["FIRE04"]) ||
+          kbstate.IsKeyDown(J2.Controls["FIRE05"]) ||
+          kbstate.IsKeyDown(J2.Controls["FIRE06"])) && _rectDestination.Contains(J2.Position.X, J2.Position.Y))
         {
           // sound explosion
           _fireflag = true;

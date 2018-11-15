@@ -3,7 +3,7 @@
   <SourceFile>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/fire_sniper_reload.wav</SourceFile>
   <SourceTime>2018-10-29T16:17:08.9014453+01:00</SourceTime>
   <DestFile>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/bin/Windows/sound/fire_sniper_reload.xnb</DestFile>
-  <DestTime>2018-11-01T09:42:53.9626614+01:00</DestTime>
+  <DestTime>2018-11-14T20:04:19.0309724+01:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

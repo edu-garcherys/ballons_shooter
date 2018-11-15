@@ -18,10 +18,10 @@ namespace Sprites
       NOTYPEWRITTER = 2
     };
 
-    public enum TwtbPosition { FULLSCREEN, CENTER, CENTERTOP, CENTERTOPMIDDLE, CENTERBOTTOM, CENTERBOTTOMMIDDLE };
+    public enum TwtbPosition { FULLSCREEN, LEFTTOP, RIGHTTOP, CENTER, CENTERTOP, CENTERTOPMIDDLE, CENTERBOTTOM, CENTERBOTTOMMIDDLE };
 
-    private int _marginLeft = 50;
-    private int _marginRight = 50;
+    private int _marginHorizontal = 50;
+    private int _marginVertical = 50;
 
     private Game _game;
 
@@ -29,7 +29,8 @@ namespace Sprites
     private TwtbPosition _tbRectanglePosition;
     private Vector2 _tbRectangleSize;
     private TwtbEffects _effects;
-    private Texture2D _bgColor;
+    private Color _bgColor = Color.White;
+    private float _bgTransparency = 1.0f;
 
     private SpriteFont _font;
     private Color _fontColor = Color.WhiteSmoke;
@@ -57,11 +58,15 @@ namespace Sprites
     internal TwtbPosition TbRectanglePosition { get => _tbRectanglePosition; set => _tbRectanglePosition = value; }
     public int DelayInMs { set => _delayInMs = value; }
     public Color FontColor { set => _fontColor = value; }
+    public Color BgColor { get => _bgColor; set => _bgColor = value; }
+    public float BgTransparency { get => _bgTransparency; set => _bgTransparency = value; }
+    public int MarginVertical { get => _marginVertical; set => _marginVertical = value; }
 
     public TypeWriterTextBox(Game game)
     {
       _game = game;
 
+      BgTransparency = 1.0f;
       // default rectangle
       _tbRectangleSize = new Vector2(500, 100);
       _delayInMs = 100;
@@ -74,8 +79,7 @@ namespace Sprites
 
     public virtual void LoadContent()
     {
-      _bgColor = _game.Content.Load<Texture2D>("solidwhite");
-      _font = _game.Content.Load<SpriteFont>("fonts/spicy_rice_24");
+      _font = _game.Content.Load<SpriteFont>("fonts/CaptureSmallz");
 
       _isDoneDrawing = false;
       _isLoop = true;
@@ -97,7 +101,7 @@ namespace Sprites
       if (_effects.HasFlag(TwtbEffects.NOTYPEWRITTER))
       {
         _typedText = Text;
-        return ;
+        return;
       }
 
       if (!_isDoneDrawing)
@@ -145,26 +149,24 @@ namespace Sprites
       // draw effect
       if (_effects.HasFlag(TwtbEffects.BACKGROUND))
       {
-        spriteBatch.Draw(_bgColor, TbRectangle, Color.White * 0.5f);
+        spriteBatch.Draw(_game.Content.Load<Texture2D>("solidwhite"), TbRectangle, BgColor * BgTransparency);
       }
 
       // draw text
       spriteBatch.DrawString(
         _font,
         ParseText(_typedText),
-        new Vector2(TbRectangle.X, TbRectangle.Y),
+        new Vector2(TbRectangle.X + _marginHorizontal / 2, TbRectangle.Y),
         _fontColor);
     }
 
     private String ParseText(String text)
     {
-      
+
       String line = String.Empty;
       String returnString = String.Empty;
 
-      // protect text == null
-      text = text == null ? "" : text;
-      String[] wordArray = text.Split(' ');
+      String[] wordArray = Text.Split(' ');
 
       foreach (String word in wordArray)
       {
@@ -180,37 +182,54 @@ namespace Sprites
       return returnString + line;
     }
 
+
     private void UpdateTextboxRectangle()
     {
       int maxWidth = _game.GraphicsDevice.Viewport.Width;
       int maxHeight = _game.GraphicsDevice.Viewport.Height;
 
-      // update rectangle to max screen size */
-      int nbLines = ((int)(_font.MeasureString(_text).X + 5) / maxWidth) + 1;
+      // update rectangle to max screen size
+      int nbLines = ((int)(_font.MeasureString(Text).X + _marginHorizontal * 2) / maxWidth) + 1;
       _tbRectangleSize = new Vector2(
-        nbLines == 1 ? _font.MeasureString(_text).X + 5 : maxWidth - (_marginLeft + _marginRight),
-        nbLines * _font.MeasureString(_text).Y
+        nbLines == 1 ? _font.MeasureString(Text).X + 50 : maxWidth - (_marginHorizontal * 2),
+        nbLines * _font.MeasureString(Text).Y
         );
+
+      int availableWidth = maxWidth - (_marginHorizontal * 2);
+      int availableHeight = maxHeight - (MarginVertical * 2);
+      int center = (int)(availableWidth - _tbRectangleSize.X) / 2 + _marginHorizontal;
+      int left = (int)((availableWidth / 4) - (_tbRectangleSize.X / 2));
+      int right = (int)((availableWidth / 4) * 3 - (_tbRectangleSize.X / 2));
+
+      int middle = (int)(availableHeight - _tbRectangleSize.Y) / 2;
+      int top = MarginVertical;
+      int bottom = (int)(availableHeight - _tbRectangleSize.Y);
 
       switch (_tbRectanglePosition)
       {
         case TwtbPosition.FULLSCREEN:
-          TbRectangle = new Rectangle(0 + _marginLeft, 0, maxWidth - _marginRight, maxHeight);
+          TbRectangle = new Rectangle(_marginHorizontal, MarginVertical, maxWidth - _marginHorizontal, maxHeight - MarginVertical);
           break;
         case TwtbPosition.CENTER:
-          TbRectangle = new Rectangle((int)(maxWidth - (_marginLeft + _marginRight) - _tbRectangleSize.X) / 2, (int)(maxHeight - _tbRectangleSize.Y) / 2, (int)_tbRectangleSize.X, (int)_tbRectangleSize.Y);
+          TbRectangle = new Rectangle(center, middle, (int)_tbRectangleSize.X, (int)_tbRectangleSize.Y);
           break;
         case TwtbPosition.CENTERTOP:
-          TbRectangle = new Rectangle((int)(maxWidth - (_marginLeft + _marginRight) - _tbRectangleSize.X) / 2 + _marginLeft, 0, (int)_tbRectangleSize.X, (int)_tbRectangleSize.Y);
+          TbRectangle = new Rectangle(center, 0, (int)_tbRectangleSize.X, (int)_tbRectangleSize.Y);
           break;
         case TwtbPosition.CENTERBOTTOM:
-          TbRectangle = new Rectangle((int)(maxWidth - (_marginLeft + _marginRight) - _tbRectangleSize.X) / 2 + _marginLeft, (int)(maxHeight - _tbRectangleSize.Y), (int)_tbRectangleSize.X, (int)_tbRectangleSize.Y);
+          TbRectangle = new Rectangle(center, bottom, (int)_tbRectangleSize.X, (int)_tbRectangleSize.Y);
           break;
         case TwtbPosition.CENTERBOTTOMMIDDLE:
-          TbRectangle = new Rectangle((int)(maxWidth - (_marginLeft + _marginRight) - _tbRectangleSize.X) / 2 + _marginLeft, (int)((maxHeight - _tbRectangleSize.Y) * 2 / 3), (int)_tbRectangleSize.X, (int)_tbRectangleSize.Y);
+          TbRectangle = new Rectangle(center, (int)((maxHeight - _tbRectangleSize.Y) * 2 / 3), (int)_tbRectangleSize.X, (int)_tbRectangleSize.Y);
           break;
         case TwtbPosition.CENTERTOPMIDDLE:
-          TbRectangle = new Rectangle((int)(maxWidth - (_marginLeft + _marginRight) - _tbRectangleSize.X) / 2 + _marginLeft, (int)((maxHeight - _tbRectangleSize.Y) * 1 / 3), (int)_tbRectangleSize.X, (int)_tbRectangleSize.Y);
+          TbRectangle = new Rectangle(center, (int)((maxHeight - _tbRectangleSize.Y) * 1 / 3), (int)_tbRectangleSize.X, (int)_tbRectangleSize.Y);
+          break;
+        case TwtbPosition.LEFTTOP:
+          TbRectangle = new Rectangle(left, MarginVertical, (int)_tbRectangleSize.X, (int)_tbRectangleSize.Y);
+          break;
+        case TwtbPosition.RIGHTTOP:
+          TbRectangle = new Rectangle(right, MarginVertical, (int)_tbRectangleSize.X, (int)_tbRectangleSize.Y);
           break;
       }
 

@@ -3,7 +3,7 @@
   <SourceFile>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/boing.wav</SourceFile>
   <SourceTime>2018-10-30T08:51:23.9381148+01:00</SourceTime>
   <DestFile>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/bin/Windows/sound/boing.xnb</DestFile>
-  <DestTime>2018-11-01T09:42:53.5729035+01:00</DestTime>
+  <DestTime>2018-11-14T20:04:18.6042381+01:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

@@ -25,7 +25,7 @@ namespace Sprites
 
     private Random _rnd = new Random(DateTime.Now.Millisecond);
 
-    private string[] _explosionSounds = { "sound/ballon_explo_01", "sound/ballon_explo_02", "sound/ballon_explo_03"};
+    private string[] _explosionSounds = { "sound/ballon_explo_01", "sound/ballon_explo_02", "sound/ballon_explo_03" };
     SoundEffect _sound;
 
     #region constructeurs
@@ -76,7 +76,13 @@ namespace Sprites
       if (_isactive)
       {
         // player 1
-        if (kbstate.IsKeyDown(J1.Controls["FIRE01"]) && _rectDestination.Contains(J1.Position.X, J1.Position.Y))
+        if ((
+          kbstate.IsKeyDown(J1.Controls["FIRE01"]) ||
+          kbstate.IsKeyDown(J1.Controls["FIRE02"]) ||
+          kbstate.IsKeyDown(J1.Controls["FIRE03"]) ||
+          kbstate.IsKeyDown(J1.Controls["FIRE04"]) ||
+          kbstate.IsKeyDown(J1.Controls["FIRE05"]) ||
+          kbstate.IsKeyDown(J1.Controls["FIRE06"])) && _rectDestination.Contains(J1.Position.X, J1.Position.Y))
         {
           // on active l'explosion
           _explosionAnimated.IsActive = true;
@@ -98,7 +104,13 @@ namespace Sprites
           J1.Score++;
         }
         // player 2
-        if (kbstate.IsKeyDown(J2.Controls["FIRE01"]) && _rectDestination.Contains(J2.Position.X, J2.Position.Y))
+        if ((
+          kbstate.IsKeyDown(J2.Controls["FIRE01"]) ||
+          kbstate.IsKeyDown(J2.Controls["FIRE02"]) ||
+          kbstate.IsKeyDown(J2.Controls["FIRE03"]) ||
+          kbstate.IsKeyDown(J2.Controls["FIRE04"]) ||
+          kbstate.IsKeyDown(J2.Controls["FIRE05"]) ||
+          kbstate.IsKeyDown(J2.Controls["FIRE06"])) && _rectDestination.Contains(J2.Position.X, J2.Position.Y))
         {
           // on active l'explosion
           _explosionAnimated.IsActive = true;

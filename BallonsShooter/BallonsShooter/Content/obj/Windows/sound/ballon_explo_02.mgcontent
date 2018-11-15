@@ -3,7 +3,7 @@
   <SourceFile>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/ballon_explo_02.wav</SourceFile>
   <SourceTime>2018-10-30T08:51:17.9807709+01:00</SourceTime>
   <DestFile>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/bin/Windows/sound/ballon_explo_02.xnb</DestFile>
-  <DestTime>2018-11-01T09:42:53.1921386+01:00</DestTime>
+  <DestTime>2018-11-14T20:04:18.2114787+01:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

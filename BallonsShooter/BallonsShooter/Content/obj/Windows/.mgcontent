@@ -18,8 +18,6 @@
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/firesong.wav</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/background/background_white.jpg</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/firesong_02.wav</File>
-    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/fonts/moire_bold_24.spritefont</File>
-    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/fonts/moire_bold_48.spritefont</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/viseurs/viseur_70_blue.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/viseurs/viseur_70_red.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/viseurs/viseur_70_fin_blue.png</File>
@@ -46,11 +44,11 @@
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/boing.wav</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/fire_blast.wav</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/fire_sniper_reload.wav</File>
-    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/fonts/spicy_rice_24.spritefont</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/logoinformatique.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/logoinformatique_white.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/icon_volume.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/icon_volume_muted.png</File>
     <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/logoinformatique_round.png</File>
+    <File>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/fonts/CaptureSmallz.spritefont</File>
   </SourceFiles>
 </SourceFileCollection>

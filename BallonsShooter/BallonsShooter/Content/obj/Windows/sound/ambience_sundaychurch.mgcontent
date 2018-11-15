@@ -3,7 +3,7 @@
   <SourceFile>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/sound/ambience_sundaychurch.wav</SourceFile>
   <SourceTime>2018-10-30T08:57:37.5320624+01:00</SourceTime>
   <DestFile>D:/Development/github/ballons_shooter/BallonsShooter/BallonsShooter/Content/bin/Windows/sound/ambience_sundaychurch.xnb</DestFile>
-  <DestTime>2018-11-01T09:42:52.8113764+01:00</DestTime>
+  <DestTime>2018-11-14T20:04:17.784742+01:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

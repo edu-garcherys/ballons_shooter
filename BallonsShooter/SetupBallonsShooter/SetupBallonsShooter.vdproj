@@ -15,18 +15,6 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_1770489B4FA04F1F9E518F68E09BA719"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_23488FF43440427687091DB55C4A9D5D"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_2D0B5A3BD16B39A4E2AE014C86D3D713"
         "OwnerKey" = "8:_E38E47367CD39517354A9B628689B09E"
         "MsmSig" = "8:_UNDEFINED"
@@ -40,18 +28,6 @@
         "Entry"
         {
         "MsmKey" = "8:_3506B846A0424C26A1393CC7F9B350DC"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_422E492CD84B460DB3CA5F7537363BED"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_4A4CD5C57BC44E65A3FAF3A455BB77A6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -77,6 +53,12 @@
         {
         "MsmKey" = "8:_4BD3362A8A5358FCEA5AC4676417653B"
         "OwnerKey" = "8:_F20401F6066F883CDD29F5CCD0F8071C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6DCA63123DDF4F58B14E796FFF0F8FA1"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -135,6 +117,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_8798CAA725EC496A963F9DB86F54AA82"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_9DC26610EC596427964B1A3614D6F944"
         "OwnerKey" = "8:_E38E47367CD39517354A9B628689B09E"
         "MsmSig" = "8:_UNDEFINED"
@@ -147,12 +135,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A2995C238DA34739A9E9452A5C983D22"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_AF1463F888814720DEBC4D6AAAFB8FAC"
         "OwnerKey" = "8:_E38E47367CD39517354A9B628689B09E"
         "MsmSig" = "8:_UNDEFINED"
@@ -161,12 +143,6 @@
         {
         "MsmKey" = "8:_AF1463F888814720DEBC4D6AAAFB8FAC"
         "OwnerKey" = "8:_3506B846A0424C26A1393CC7F9B350DC"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_BE21174C1F7F4CD1BEC65DCF98F868E5"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -296,6 +272,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
         "Release"
@@ -358,46 +342,6 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1770489B4FA04F1F9E518F68E09BA719"
-            {
-            "SourcePath" = "8:..\\..\\birdy game.ttf"
-            "TargetName" = "8:birdy game.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_F89629413D6B4D6FB2EBD6476E67A01E"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_23488FF43440427687091DB55C4A9D5D"
-            {
-            "SourcePath" = "8:..\\..\\Moire-Regular.ttf"
-            "TargetName" = "8:Moire-Regular.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_F89629413D6B4D6FB2EBD6476E67A01E"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2D0B5A3BD16B39A4E2AE014C86D3D713"
             {
             "AssemblyRegister" = "3:1"
@@ -427,46 +371,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_422E492CD84B460DB3CA5F7537363BED"
-            {
-            "SourcePath" = "8:..\\..\\Moire-Light.ttf"
-            "TargetName" = "8:Moire-Light.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_F89629413D6B4D6FB2EBD6476E67A01E"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4A4CD5C57BC44E65A3FAF3A455BB77A6"
-            {
-            "SourcePath" = "8:..\\..\\Moire-Bold.ttf"
-            "TargetName" = "8:Moire-Bold.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_F89629413D6B4D6FB2EBD6476E67A01E"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4BD3362A8A5358FCEA5AC4676417653B"
@@ -500,6 +404,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6DCA63123DDF4F58B14E796FFF0F8FA1"
+            {
+            "SourcePath" = "8:..\\..\\Capsmall_clean.ttf"
+            "TargetName" = "8:Capsmall_clean.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_F89629413D6B4D6FB2EBD6476E67A01E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_86315441CFB2EA15CB5276E5DCE099E5"
             {
             "AssemblyRegister" = "3:1"
@@ -529,6 +453,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8798CAA725EC496A963F9DB86F54AA82"
+            {
+            "SourcePath" = "8:..\\..\\Capsmall.ttf"
+            "TargetName" = "8:Capsmall.ttf"
+            "Tag" = "8:"
+            "Folder" = "8:_F89629413D6B4D6FB2EBD6476E67A01E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9DC26610EC596427964B1A3614D6F944"
@@ -562,26 +506,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A2995C238DA34739A9E9452A5C983D22"
-            {
-            "SourcePath" = "8:..\\..\\SpicyRice-Regular.ttf"
-            "TargetName" = "8:SpicyRice-Regular.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_F89629413D6B4D6FB2EBD6476E67A01E"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_AF1463F888814720DEBC4D6AAAFB8FAC"
             {
             "AssemblyRegister" = "3:1"
@@ -611,26 +535,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BE21174C1F7F4CD1BEC65DCF98F868E5"
-            {
-            "SourcePath" = "8:..\\..\\Moire-ExtraBold.ttf"
-            "TargetName" = "8:Moire-ExtraBold.ttf"
-            "Tag" = "8:"
-            "Folder" = "8:_F89629413D6B4D6FB2EBD6476E67A01E"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D94FAEF21D059D4E4A36925D42CC06D7"
@@ -813,15 +717,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Ballons Shooter"
-        "ProductCode" = "8:{05C07936-5B6C-496D-B3EF-2E11BDBA5E0E}"
-        "PackageCode" = "8:{660B4533-ACFB-4A6D-BE1B-6DF9C0ABD3E6}"
+        "ProductCode" = "8:{7CBB231E-CE3D-423C-9780-22CA1B69B098}"
+        "PackageCode" = "8:{BA0BC51F-E0E1-4911-B364-27FB2E8472FD}"
         "UpgradeCode" = "8:{76369FFB-EE49-488B-A197-40782937EF46}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.1.1"
+        "ProductVersion" = "8:1.2.0"
         "Manufacturer" = "8:CFPTEI"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

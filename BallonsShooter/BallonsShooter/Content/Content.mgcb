@@ -163,20 +163,6 @@
 /processorParam:Quality=Best
 /build:sound/firesong_02.wav
 
-#begin fonts/moire_bold_24.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:fonts/moire_bold_24.spritefont
-
-#begin fonts/moire_bold_48.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:fonts/moire_bold_48.spritefont
-
 #begin viseurs/viseur_70_blue.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -435,13 +421,6 @@
 /processorParam:Quality=Best
 /build:sound/fire_sniper_reload.wav
 
-#begin fonts/spicy_rice_24.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:fonts/spicy_rice_24.spritefont
-
 #begin logoinformatique.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -501,4 +480,11 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:logoinformatique_round.png
+
+#begin fonts/CaptureSmallz.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fonts/CaptureSmallz.spritefont
 

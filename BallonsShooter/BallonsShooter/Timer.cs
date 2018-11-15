@@ -12,16 +12,21 @@ namespace BallonsShooter
   class Timer
   {
 
-    DrawSentence _txtTimer;
+    TypeWriterTextBox _txtTimer;
     protected int _elapsedTimeMs = 0;
 
 
     public Timer(Game game)
     {
-      _txtTimer = new DrawSentence(game, DrawSentence.TextPosition.CENTERTOP, DrawSentence.TextEffect.BACKGROUND);
-      _txtTimer.LoadContent();
-      _txtTimer.Font_color = Color.Black;      
+
+      _txtTimer = new TypeWriterTextBox(game);
+      _txtTimer.TbRectanglePosition = TypeWriterTextBox.TwtbPosition.CENTERTOP;
+      _txtTimer.Effects = TypeWriterTextBox.TwtbEffects.BACKGROUND | TypeWriterTextBox.TwtbEffects.NOTYPEWRITTER;
+      _txtTimer.FontColor = Color.Black;
+      _txtTimer.BgTransparency = 1.0f;      
       _txtTimer.Text = "00:00:00.00";
+
+      _txtTimer.LoadContent();
     }
     public void Restart()
     {

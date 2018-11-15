@@ -50,7 +50,7 @@ namespace Sprites
     private string _text;                                         // le texte à afficher
 
     private SpriteFont _font;                                     // font sprite
-    private String _font_content = "fonts/moire_bold_24";         // font ressource name (inside Content.mgcb)
+    private String _font_content = "fonts/CaptureSmallz";         // font ressource name (inside Content.mgcb)
     private Color _font_color = Color.Black;                      // couleur par défaut
     private float _font_size = 1.0f;                             // zoom
 

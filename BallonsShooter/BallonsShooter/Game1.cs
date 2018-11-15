@@ -105,7 +105,12 @@ namespace BallonsShooter
           {"RIGHT", Keys.D},
           {"DOWN", Keys.S },
           {"LEFT", Keys.A },
-          {"FIRE01", Keys.F }
+          {"FIRE01", Keys.F },
+          {"FIRE02", Keys.G },
+          {"FIRE03", Keys.H },
+          {"FIRE04", Keys.V },
+          {"FIRE05", Keys.B },
+          {"FIRE06", Keys.N }
         }
         );
       _joueur1.Initialize();
@@ -122,7 +127,12 @@ namespace BallonsShooter
           {"RIGHT", Keys.Right },
           {"DOWN", Keys.Down },
           {"LEFT", Keys.Left },
-          {"FIRE01", Keys.NumPad4 }
+          {"FIRE01", Keys.NumPad4 },
+          {"FIRE02", Keys.NumPad5 },
+          {"FIRE03", Keys.NumPad6 },
+          {"FIRE04", Keys.NumPad1 },
+          {"FIRE05", Keys.NumPad2 },
+          {"FIRE06", Keys.NumPad3 }
         }
         );
       _joueur2.Initialize();
@@ -139,16 +149,17 @@ namespace BallonsShooter
       _twtbCFPT.Initialize();
       _twtbCFPT.Text = ConfigurationManager.AppSettings.Get("CFPTMessage");
       _twtbCFPT.DelayInMs = 20;
-      _twtbCFPT.FontColor = Color.Black;
+      _twtbCFPT.FontColor = Color.White;
       _twtbCFPT.TbRectanglePosition = TypeWriterTextBox.TwtbPosition.CENTERBOTTOM;
-      _twtbCFPT.Effects = TypeWriterTextBox.TwtbEffects.BACKGROUND | TypeWriterTextBox.TwtbEffects.NOTYPEWRITTER;
+      _twtbCFPT.MarginVertical = 10;
+      //_twtbCFPT.Effects = TypeWriterTextBox.TwtbEffects.BACKGROUND;      
 
       _twtbExplain = new TypeWriterTextBox(this);
       _twtbExplain.Initialize();
       _twtbExplain.Text = ConfigurationManager.AppSettings.Get("ExplainMessage");
       _twtbExplain.FontColor = Color.DarkSlateGray;
       _twtbExplain.TbRectanglePosition = TypeWriterTextBox.TwtbPosition.CENTERTOPMIDDLE;
-      _twtbExplain.Effects = TypeWriterTextBox.TwtbEffects.BACKGROUND | TypeWriterTextBox.TwtbEffects.NOTYPEWRITTER;
+      _twtbExplain.Effects = TypeWriterTextBox.TwtbEffects.BACKGROUND | TypeWriterTextBox.TwtbEffects.NONE;
 
       // typewritertextbox waiting message
       _twtbWaiting = new TypeWriterTextBox(this);
@@ -156,7 +167,7 @@ namespace BallonsShooter
       _twtbWaiting.Text = ConfigurationManager.AppSettings.Get("StartMessage");
       _twtbWaiting.FontColor = Color.Yellow;
       _twtbWaiting.TbRectanglePosition = TypeWriterTextBox.TwtbPosition.CENTER;
-      _twtbWaiting.Effects = TypeWriterTextBox.TwtbEffects.NONE;
+      //_twtbWaiting.Effects = TypeWriterTextBox.TwtbEffects.NOTYPEWRITTER;
 
       // typewritertextbox winner message
       _twtbWinner = new TypeWriterTextBox(this);
@@ -258,7 +269,7 @@ namespace BallonsShooter
           _elapsedButtonTimeMs = 0;
           _soundEffectOn = !_soundEffectOn;
         }
-        
+
       }
 
       // état du jeu
@@ -269,7 +280,7 @@ namespace BallonsShooter
           _twtbCFPT.Update(gameTime);
           _twtbExplain.Update(gameTime);
           _twtbWaiting.Update(gameTime);
-          _dsWaiting.Update(gameTime);
+          //_dsWaiting.Update(gameTime);
 
           _birdR.Update(gameTime, null, null, _soundEffectOn);
           _birdB.Update(gameTime, null, null, _soundEffectOn);
@@ -376,7 +387,7 @@ namespace BallonsShooter
           _joueur1.Draw(_spriteBatch);
           _joueur2.Draw(_spriteBatch);
 
-          _timer.Draw(_spriteBatch);
+          //_timer.Draw(_spriteBatch);
           break;
         case GameState.FINISHED:
           _spriteBatch.Draw(backgroundTexture, mainFrame, Color.White);

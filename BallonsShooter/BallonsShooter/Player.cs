@@ -27,7 +27,7 @@ namespace BallonsShooter
     SpriteGeneric _sprite_viseur;
     SpriteGeneric.ViewportPosition _sprite_initiale_position;
     private String _viseur_texture_name;
-    private float _movespeed = 10;
+    private float _movespeed = 5;
 
     public Vector2 Position { get => _sprite_viseur.Position; set => _sprite_viseur.Position = value; }
 
@@ -35,7 +35,7 @@ namespace BallonsShooter
     public int Score { get => _score; set => _score = value; }
     public IDictionary<string, Keys> Controls { get => _controls; set => _controls = value; }
 
-    private DrawSentence _score_message;
+    private TypeWriterTextBox _score_message;
 
     private string[] _fireSounds = { "sound/fire_blast", "sound/fire_sniper_reload" };  // not used
     SoundEffect _sound_fire;
@@ -69,12 +69,12 @@ namespace BallonsShooter
     {
       _sprite_viseur = new SpriteGeneric(_game);
 
-      _score_message = new DrawSentence(
-        _game,
-        _position == PlayerScreenPosition.LEFT ? DrawSentence.TextPosition.LEFTCENTERTOP : DrawSentence.TextPosition.RIGHTCENTERTOP,
-        DrawSentence.TextEffect.BACKGROUND
-        );
-      _score_message.Font_color = _position == PlayerScreenPosition.LEFT ? Color.Red : Color.Blue;
+      _score_message = new TypeWriterTextBox(_game);
+      _score_message.TbRectanglePosition = _position == PlayerScreenPosition.LEFT ? TypeWriterTextBox.TwtbPosition.LEFTTOP : TypeWriterTextBox.TwtbPosition.RIGHTTOP;
+      _score_message.Effects = TypeWriterTextBox.TwtbEffects.BACKGROUND | TypeWriterTextBox.TwtbEffects.NOTYPEWRITTER;
+      _score_message.FontColor = _position == PlayerScreenPosition.LEFT ? Color.Red : Color.Blue;
+      _score_message.BgColor = Color.White;
+      _score_message.BgTransparency = 0.9f;
     }
 
     public virtual void LoadContent()
@@ -106,7 +106,13 @@ namespace BallonsShooter
       Y -= state.IsKeyDown(Controls["UP"]) ? _movespeed : 0;
       Y += state.IsKeyDown(Controls["DOWN"]) ? _movespeed : 0;
 
-      if (state.IsKeyDown(Controls["FIRE01"]) && _fireflag)
+      if ((
+        state.IsKeyDown(Controls["FIRE01"]) ||
+        state.IsKeyDown(Controls["FIRE02"]) ||
+        state.IsKeyDown(Controls["FIRE03"]) ||
+        state.IsKeyDown(Controls["FIRE04"]) ||
+        state.IsKeyDown(Controls["FIRE05"]) ||
+        state.IsKeyDown(Controls["FIRE06"]))&& _fireflag)
       {
         if (soundEffect)
           _sound_fire.Play();
